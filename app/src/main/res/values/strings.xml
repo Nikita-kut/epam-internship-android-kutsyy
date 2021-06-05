@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">epam-internship-android-kutsyy</string>
+    <string name="textview_text">Android EPAM internship course</string>
+    <string name="button_text">Get job</string>
 </resources>
