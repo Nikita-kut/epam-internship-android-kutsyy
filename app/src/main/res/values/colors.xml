@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="black_text">#252525</color>
+    <color name="black_grey_text">#464E60</color>
+    <color name="black_light_grey_text">#55617B</color>
+    <color name="grey_text_70">#777777</color>
+    <color name="black_text_meal_details">#222222</color>
+    <color name="item_toolbar_background">#F5F2FC</color>
+    <color name="meal_list_background">#F4F4F4</color>
+    <color name="selected_item_background">#FF7070</color>
+    <color name="ingredients_background">#FCFBFF</color>
 </resources>
