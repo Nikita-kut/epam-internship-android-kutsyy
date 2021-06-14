@@ -7,12 +7,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.ItemMealBinding
 import com.nikita.kut.android.epam_internship_android_kutsyy.model.Meal
 
-class MealHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+class MealHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemMealBinding.bind(view)
-    lateinit var listener: Adapter.OnMealItemClick
+    lateinit var listener: Adapter.OnMealItemClickListener
 
-    fun bind(meal: Meal, listener: Adapter.OnMealItemClick) {
+    fun bind(meal: Meal, listener: Adapter.OnMealItemClickListener) {
         Glide.with(itemView)
             .load(meal.mealPicture)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -22,11 +22,9 @@ class MealHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListen
             .into(binding.ivItemMealPicture)
         binding.tvItemMealName.text = meal.name
         this.listener = listener
-        itemView.setOnClickListener(this)
-    }
-
-    override fun onClick(v: View?) {
-        listener.onItemClick(adapterPosition)
+        binding.root.setOnClickListener {
+            listener.onItemClick(meal)
+        }
     }
 
 

@@ -26,7 +26,7 @@
                 style="@style/TextStyleMealList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Заголовок экрана" />
+                android:text="@string/toolbar_text_example" />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -36,8 +36,8 @@
         android:id="@+id/iv_meal_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin"
         android:background="@drawable/meal_picture_back"
         android:src="@drawable/beef"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,8 +47,8 @@
         android:id="@+id/rv_meal_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginVertical="15dp"
+        android:layout_marginHorizontal="@dimen/margin_small"
+        android:layout_marginVertical="@dimen/margin"
         android:background="@drawable/recyclerview_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

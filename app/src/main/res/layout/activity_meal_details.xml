@@ -56,8 +56,8 @@
                 style="@style/TextStyleMealDetails.MealCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginTop="@dimen/margin_extra"
                 tools:text="JAPANESE" />
 
             <TextView
@@ -65,8 +65,8 @@
                 style="@style/TextStyleMealDetails.MealName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginTop="@dimen/margin_extra_small"
                 tools:text="Teriyaki Chicken Casserole" />
 
             <TextView
@@ -74,8 +74,8 @@
                 style="@style/TextStyleMealDetails.MealTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginTop="@dimen/margin_small"
                 android:background="@drawable/meal_tag_background"
                 android:gravity="center"
                 tools:text="Meat" />
@@ -83,15 +83,15 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="@dimen/margin_24"
                 android:src="@drawable/separator" />
 
             <TextView
                 style="@style/TextStyleMealDetails.MealCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="18dp"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
                 android:text="@string/ingredients" />
 
             <TextView
@@ -99,7 +99,7 @@
                 style="@style/TextStyleMealDetails.MealIngredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="@dimen/margin"
                 android:text="@string/ingredients_example" />
 
 

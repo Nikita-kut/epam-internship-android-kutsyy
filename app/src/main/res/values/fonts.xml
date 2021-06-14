@@ -7,7 +7,7 @@
         <item name="fontStyle">normal</item>
         <item name="fontWeight">500</item>
         <item name="android:textColor">@color/black_text</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/text15</item>
         <item name="lineHeight">21sp</item>
         <item name="android:letterSpacing">0.2</item>
     </style>
@@ -20,7 +20,7 @@
 
     <style name="TextStyleMealDetails.MealCategory">
         <item name="fontWeight">400</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">@dimen/text13</item>
         <item name="android:textColor">@color/grey_text_70</item>
         <item name="lineHeight">20sp</item>
         <item name="android:letterSpacing">0.7</item>
@@ -28,7 +28,7 @@
 
     <style name="TextStyleMealDetails.MealName">
         <item name="fontWeight">500</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/text18</item>
         <item name="lineHeight">22sp</item>
         <item name="android:textColor">@color/black_text_meal_details</item>
         <item name="android:letterSpacing">0.2</item>
@@ -36,7 +36,7 @@
 
     <style name="TextStyleMealDetails.MealTag">
         <item name="fontWeight">400</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">@dimen/text12</item>
         <item name="android:textColor">@color/black_grey_text</item>
         <item name="lineHeight">19.2sp</item>
         <item name="android:letterSpacing">0.2</item>
@@ -45,7 +45,7 @@
     <style name="TextStyleMealDetails.MealIngredients">
         <item name="android:gravity">start</item>
         <item name="fontWeight">400</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">@dimen/text12</item>
         <item name="android:textColor">@color/black_light_grey_text</item>
         <item name="lineHeight">17sp</item>
         <item name="android:letterSpacing">0.2</item>

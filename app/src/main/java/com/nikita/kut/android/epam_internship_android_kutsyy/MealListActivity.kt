@@ -7,10 +7,10 @@ import com.nikita.kut.android.epam_internship_android_kutsyy.adapter.Adapter
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.ActivityMealListBinding
 import com.nikita.kut.android.epam_internship_android_kutsyy.model.Meal
 
-class MealListActivity : AppCompatActivity(), Adapter.OnMealItemClick {
+class MealListActivity : AppCompatActivity(), Adapter.OnMealItemClickListener {
 
     private lateinit var binding: ActivityMealListBinding
-    private val adapter: Adapter
+    private val mealAdapter: Adapter
         get() = binding.rvMealList.adapter as Adapter
     private val meals: List<Meal> = listOf(
         Meal(
@@ -61,14 +61,15 @@ class MealListActivity : AppCompatActivity(), Adapter.OnMealItemClick {
 
     private fun setRecyclerView() {
         with(binding.rvMealList) {
-            adapter = Adapter(listener = this@MealListActivity)
+            adapter = Adapter()
+            mealAdapter.setClickListener(this@MealListActivity)
             layoutManager = LinearLayoutManager(this@MealListActivity)
             setHasFixedSize(true)
         }
-        adapter.updateList(meals)
+        mealAdapter.updateList(meals)
     }
 
-    override fun onItemClick(position: Int) {
-        startActivity(MealDetailsActivity.getIntent(this, meal = meals[position]))
+    override fun onItemClick(meal: Meal) {
+        startActivity(MealDetailsActivity.getIntent(this, meal = meal))
     }
 }

@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
 import com.nikita.kut.android.epam_internship_android_kutsyy.model.Meal
 
-class Adapter(private val listener: OnMealItemClick) : RecyclerView.Adapter<MealHolder>() {
+class Adapter : RecyclerView.Adapter<MealHolder>() {
 
     private val differ = AsyncListDiffer(this, MealDiffUtilCallback())
+
+    private lateinit var mListener: OnMealItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -18,7 +20,7 @@ class Adapter(private val listener: OnMealItemClick) : RecyclerView.Adapter<Meal
     }
 
     override fun onBindViewHolder(holder: MealHolder, position: Int) {
-        holder.bind(differ.currentList[position], listener)
+        holder.bind(differ.currentList[position], mListener)
     }
 
     override fun getItemCount(): Int = differ.currentList.size
@@ -27,7 +29,11 @@ class Adapter(private val listener: OnMealItemClick) : RecyclerView.Adapter<Meal
         differ.submitList(newMeal)
     }
 
-    interface OnMealItemClick {
-        fun onItemClick(position: Int)
+    fun setClickListener(listener: OnMealItemClickListener) {
+        mListener = listener
+    }
+
+    interface OnMealItemClickListener {
+        fun onItemClick(meal: Meal)
     }
 }
