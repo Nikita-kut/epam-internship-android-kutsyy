@@ -2,4 +2,7 @@
     <string name="app_name">epam-internship-android-kutsyy</string>
     <string name="textview_text">Android EPAM internship course</string>
     <string name="button_text">Get job</string>
+    <string name="ingredients">INGREDIENTS</string>
+    <string name="ingredients_example">Soy sauce - 3/4 cup \nWater - 1/2 cup\n Brown sugar - 1/4 cup\n Ground ginger - 1/2 teaspoon\n Minced garlic - 1/2 teaspoon \nCornstarch - 4 tablespoons \nChicken breasts - 2\n Stir-fry vegetables - 1 (12 oz.)\n Brown rice - 3 cups</string>
+    <string name="toolbar_text_example">Заголовок экрана</string>
 </resources>
