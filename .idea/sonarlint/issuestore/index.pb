@@ -15,3 +15,15 @@ gapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/adapter
 Zapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/adapter/Adapter.kt,0\1\01ebfdf38ae25401399eba7c41c0cae8ba536f54
 ç
 ]app/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/adapter/MealHolder.kt,1\5\1561da0fd134fa4e46c3d643980f4a3d0e79a2f3
+Q
+!app/src/main/res/values/fonts.xml,e\5\e51eb7474bf863ec209e6e030d289f07bdec2520
+S
+#app/src/main/res/values/strings.xml,d\2\d2281fbb3027de2722081a53408dd77628bf080e
+a
+1app/src/main/res/layout/activity_meal_details.xml,d\9\d98094311f9b55b98a60f150f3ca528e92c04e41
+R
+"app/src/main/res/values/dimens.xml,c\3\c3c1811dec2dbad2deeafb9aad505ca9631da740
+^
+.app/src/main/res/layout/activity_meal_list.xml,4\5\458be373f1874edf20b24ed6ce8887eaaaa01ce4
+U
+%app/src/main/res/layout/item_meal.xml,7\e\7ea095c0de06b48f5b1913dda8aaaaf636e7f4a2

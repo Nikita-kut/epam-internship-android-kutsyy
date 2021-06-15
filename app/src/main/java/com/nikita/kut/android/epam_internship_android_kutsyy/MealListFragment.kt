@@ -1,17 +1,21 @@
 package com.nikita.kut.android.epam_internship_android_kutsyy
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikita.kut.android.epam_internship_android_kutsyy.adapter.Adapter
-import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.ActivityMealListBinding
+import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealListBinding
 import com.nikita.kut.android.epam_internship_android_kutsyy.model.Meal
 
-class MealListActivity : AppCompatActivity(), Adapter.OnMealItemClickListener {
+class MealListFragment : Fragment(), Adapter.OnMealItemClickListener {
 
-    private lateinit var binding: ActivityMealListBinding
+    private lateinit var binding: FragmentMealListBinding
     private val mealAdapter: Adapter
         get() = binding.rvMealList.adapter as Adapter
+
     private val meals: List<Meal> = listOf(
         Meal(
             mealPicture = R.drawable.meal_example_1,
@@ -51,25 +55,40 @@ class MealListActivity : AppCompatActivity(), Adapter.OnMealItemClickListener {
         )
     )
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMealListBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setRecyclerView()
-
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentMealListBinding.inflate(inflater, container, false)
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setRecyclerView()
+    }
+
 
     private fun setRecyclerView() {
         with(binding.rvMealList) {
             adapter = Adapter()
-            mealAdapter.setClickListener(this@MealListActivity)
-            layoutManager = LinearLayoutManager(this@MealListActivity)
+            mealAdapter.setClickListener(this@MealListFragment)
+            layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
         }
         mealAdapter.updateList(meals)
     }
 
     override fun onItemClick(meal: Meal) {
-        startActivity(MealDetailsActivity.getIntent(this, meal = meal))
+        openFragment(meal)
+    }
+
+    private fun openFragment(meal: Meal) {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_main_container, MealDetailsFragment.newInstanceWithArgs(meal))
+            .addToBackStack(null)
+            .commit()
     }
 }
