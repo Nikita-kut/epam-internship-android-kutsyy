@@ -1,4 +1,4 @@
-package com.nikita.kut.android.epam_internship_android_kutsyy.model
+package com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model
 
 import android.os.Parcelable
 import androidx.annotation.DrawableRes

@@ -1,18 +1,18 @@
-package com.nikita.kut.android.epam_internship_android_kutsyy.adapter
+package com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.ItemMealBinding
-import com.nikita.kut.android.epam_internship_android_kutsyy.model.Meal
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Meal
 
 class MealHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemMealBinding.bind(view)
-    lateinit var listener: Adapter.OnMealItemClickListener
+    lateinit var listener: MealAdapter.OnMealItemClickListener
 
-    fun bind(meal: Meal, listener: Adapter.OnMealItemClickListener) {
+    fun bind(meal: Meal, listener: MealAdapter.OnMealItemClickListener) {
         Glide.with(itemView)
             .load(meal.mealPicture)
             .diskCacheStrategy(DiskCacheStrategy.NONE)

@@ -1,7 +1,8 @@
-package com.nikita.kut.android.epam_internship_android_kutsyy
+package com.nikita.kut.android.epam_internship_android_kutsyy.app.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.main.presentation.MainFragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

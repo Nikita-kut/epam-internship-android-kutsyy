@@ -1,10 +1,11 @@
-package com.nikita.kut.android.epam_internship_android_kutsyy
+package com.nikita.kut.android.epam_internship_android_kutsyy.feature.main.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.MealListFragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {

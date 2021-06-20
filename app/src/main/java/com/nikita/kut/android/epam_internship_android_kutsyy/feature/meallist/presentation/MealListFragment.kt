@@ -1,4 +1,4 @@
-package com.nikita.kut.android.epam_internship_android_kutsyy
+package com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,15 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.nikita.kut.android.epam_internship_android_kutsyy.adapter.Adapter
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.presentation.MealDetailsFragment
+import com.nikita.kut.android.epam_internship_android_kutsyy.R
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.MealAdapter
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealListBinding
-import com.nikita.kut.android.epam_internship_android_kutsyy.model.Meal
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Meal
 
-class MealListFragment : Fragment(), Adapter.OnMealItemClickListener {
+class MealListFragment : Fragment(), MealAdapter.OnMealItemClickListener {
 
     private lateinit var binding: FragmentMealListBinding
-    private val mealAdapter: Adapter
-        get() = binding.rvMealList.adapter as Adapter
+    private val mealAdapter: MealAdapter
+        get() = binding.rvMealList.adapter as MealAdapter
 
     private val meals: List<Meal> = listOf(
         Meal(
@@ -66,13 +68,13 @@ class MealListFragment : Fragment(), Adapter.OnMealItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setRecyclerView()
+        initRecyclerView()
     }
 
 
-    private fun setRecyclerView() {
+    private fun initRecyclerView() {
         with(binding.rvMealList) {
-            adapter = Adapter()
+            adapter = MealAdapter()
             mealAdapter.setClickListener(this@MealListFragment)
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
