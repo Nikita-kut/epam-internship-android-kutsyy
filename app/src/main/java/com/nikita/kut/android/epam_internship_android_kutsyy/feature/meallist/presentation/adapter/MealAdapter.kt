@@ -1,13 +1,13 @@
-package com.nikita.kut.android.epam_internship_android_kutsyy.adapter
+package com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
-import com.nikita.kut.android.epam_internship_android_kutsyy.model.Meal
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Meal
 
-class Adapter : RecyclerView.Adapter<MealHolder>() {
+class MealAdapter : RecyclerView.Adapter<MealHolder>() {
 
     private val differ = AsyncListDiffer(this, MealDiffUtilCallback())
 
