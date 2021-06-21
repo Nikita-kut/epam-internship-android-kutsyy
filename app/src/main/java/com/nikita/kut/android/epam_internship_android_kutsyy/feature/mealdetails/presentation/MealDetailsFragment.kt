@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealDetailsBinding
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Meal
@@ -39,13 +40,8 @@ class MealDetailsFragment : Fragment() {
 
     companion object {
         private const val KEY_MEAL = "KEY_MEAL"
-        fun newInstanceWithArgs(meal: Meal): MealDetailsFragment {
-            val fragment = MealDetailsFragment()
-            val args = Bundle().apply {
-                putParcelable(KEY_MEAL, meal)
-            }
-            fragment.arguments = args
-            return fragment
+        fun newInstance(meal: Meal): MealDetailsFragment = MealDetailsFragment().apply {
+            arguments = bundleOf(KEY_MEAL to meal)
         }
     }
 }

@@ -29,11 +29,13 @@ class MainFragment : Fragment() {
     private fun openFragment() {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(binding.fragmentMainContainer.id, MealListFragment())
+            .replace(binding.fragmentMainContainer.id, MealListFragment.newInstance())
             .commit()
     }
 
     companion object {
         const val MAIN_FRAGMENT_TAG = "MAIN_FRAGMENT_TAG"
+
+        fun newInstance(): MainFragment = MainFragment()
     }
 }

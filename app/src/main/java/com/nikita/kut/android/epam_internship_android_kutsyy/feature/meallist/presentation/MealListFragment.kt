@@ -89,8 +89,12 @@ class MealListFragment : Fragment(), MealAdapter.OnMealItemClickListener {
     private fun openFragment(meal: Meal) {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment_main_container, MealDetailsFragment.newInstanceWithArgs(meal))
+            .replace(R.id.fragment_main_container, MealDetailsFragment.newInstance(meal))
             .addToBackStack(null)
             .commit()
+    }
+
+    companion object {
+        fun newInstance(): MealListFragment = MealListFragment()
     }
 }

@@ -15,7 +15,7 @@ class MealHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(meal: Meal, listener: MealAdapter.OnMealItemClickListener) {
         Glide.with(itemView)
             .load(meal.mealPicture)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             .skipMemoryCache(true)
             .dontAnimate()
             .centerCrop()

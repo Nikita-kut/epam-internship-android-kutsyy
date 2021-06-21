@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(
                 binding.activityMainContainer.id,
-                MainFragment(),
+                MainFragment.newInstance(),
                 MainFragment.MAIN_FRAGMENT_TAG
             )
             .commit()
@@ -35,10 +35,15 @@ class MainActivity : AppCompatActivity() {
         val backStackCount =
             mainFragmentFragmentManager
                 ?.backStackEntryCount
-        if (backStackCount == 0) {
+
+        if (backStackCount == null) {
             super.onBackPressed()
         } else {
-            mainFragmentFragmentManager?.popBackStack()
+            if (backStackCount > 0) {
+                mainFragmentFragmentManager.popBackStack()
+            } else {
+                super.onBackPressed()
+            }
         }
     }
 }
