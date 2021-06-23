@@ -25,7 +25,7 @@ class MealDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        binding.toolbarMealList.setNavigationOnClickListener {
+        binding.toolbarMealDetails.setNavigationOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
         }
     }
