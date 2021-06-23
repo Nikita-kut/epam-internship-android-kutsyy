@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.nikita.kut.android.epam_internship_android_kutsyy.R
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.MealListFragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMainBinding
 
