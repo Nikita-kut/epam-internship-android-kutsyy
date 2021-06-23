@@ -4,7 +4,7 @@
 
     <corners android:radius="16dp" />
 
-    <solid android:color="@color/item_toolbar_background"/>
+    <solid android:color="@color/selected_item_background"/>
 
     <size
         android:width="64dp"

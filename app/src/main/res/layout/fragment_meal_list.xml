@@ -11,6 +11,8 @@
         android:id="@+id/app_bar_meal_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/meal_list_background"
+        app:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -30,18 +32,14 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-    </com.google.android.material.appbar.AppBarLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_meal_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_category" />
 
-    <ImageView
-        android:id="@+id/iv_meal_picture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin"
-        android:background="@drawable/meal_picture_back"
-        android:src="@drawable/beef"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_bar_meal_list" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_meal_list"
@@ -53,7 +51,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_meal_picture"
+        app:layout_constraintTop_toBottomOf="@id/app_bar_meal_list"
         tools:itemCount="5"
         tools:listitem="@layout/item_meal" />
 
