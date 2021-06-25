@@ -1,32 +1,27 @@
 package com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.presentation.MealDetailsFragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.MealAdapter
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.AutoClearedValue
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.ViewBindingFragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealListBinding
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.presentation.MealDetailsFragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Category
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Meal
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.CategoryAdapter
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.MealAdapter
 
-class MealListFragment : Fragment(), MealAdapter.OnMealItemClickListener,
+class MealListFragment :
+    ViewBindingFragment<FragmentMealListBinding>(FragmentMealListBinding::inflate),
+    MealAdapter.OnMealItemClickListener,
     CategoryAdapter.OnCategoryItemClickListener {
 
-    private lateinit var binding: FragmentMealListBinding
+    private var mealAdapter by AutoClearedValue<MealAdapter>()
 
-    private val mealAdapter: MealAdapter
-        get() = binding.rvMealList.adapter as MealAdapter
-
-    private val categoryAdapter: CategoryAdapter
-        get() = binding.rvMealCategory.adapter as CategoryAdapter
+    private var categoryAdapter by AutoClearedValue<CategoryAdapter>()
 
     private val meals: List<Meal> = listOf(
         Meal(
@@ -76,15 +71,6 @@ class MealListFragment : Fragment(), MealAdapter.OnMealItemClickListener,
 
         )
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentMealListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRVMealList()
@@ -93,8 +79,9 @@ class MealListFragment : Fragment(), MealAdapter.OnMealItemClickListener,
 
 
     private fun initRVMealList() {
+        mealAdapter = MealAdapter()
         with(binding.rvMealList) {
-            adapter = MealAdapter()
+            adapter = mealAdapter
             mealAdapter.setClickListener(this@MealListFragment)
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
@@ -103,8 +90,9 @@ class MealListFragment : Fragment(), MealAdapter.OnMealItemClickListener,
     }
 
     private fun initRVCategoryList() {
+        categoryAdapter = CategoryAdapter()
         with(binding.rvMealCategory) {
-            adapter = CategoryAdapter()
+            adapter = categoryAdapter
             categoryAdapter.setClickListener(this@MealListFragment)
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             setHasFixedSize(true)

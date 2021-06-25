@@ -34,7 +34,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_meal_category"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             tools:itemCount="1"
             tools:listitem="@layout/item_category" />

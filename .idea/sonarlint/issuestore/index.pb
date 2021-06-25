@@ -37,3 +37,9 @@ R
 "app/src/main/res/values/dimens.xml,c\3\c3c1811dec2dbad2deeafb9aad505ca9631da740
 Q
 !app/src/main/res/values/fonts.xml,e\5\e51eb7474bf863ec209e6e030d289f07bdec2520
+Y
+)app/src/main/res/layout/activity_main.xml,7\6\76b07e40f24cce093536731477540f12e7da3cb6
+f
+6app/src/main/res/drawable/layout_meal_details_back.xml,f\b\fbcb488bc7e9bbbb883c2c0543e8b522f069e0ac
+Y
+)app/src/main/res/navigation/nav_graph.xml,b\a\baffce053da291d96fb575a09f2bbe9aaa9c4be9
