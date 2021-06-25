@@ -68,7 +68,6 @@ class MealListFragment :
         Category(categoryPicture = R.drawable.pizza),
         Category(categoryPicture = R.drawable.pita),
         Category(categoryPicture = R.drawable.chicken),
-
         )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

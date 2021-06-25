@@ -21,6 +21,7 @@
             android:id="@+id/toolbar_meal_list"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/toolbar_menu_sort"
             android:background="@color/item_toolbar_background">
 
             <TextView
