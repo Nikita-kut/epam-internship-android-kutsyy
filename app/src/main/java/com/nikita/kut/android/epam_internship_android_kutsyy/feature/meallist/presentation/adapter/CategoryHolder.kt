@@ -19,8 +19,8 @@ class CategoryHolder(view: View) : RecyclerView.ViewHolder(view) {
             .into(binding.ivMealCategoryPicture)
         this.listener = listener
         itemView.setOnClickListener {
-            category.clickCount++
-            if (category.clickCount % 2 == 0) {
+            category.clicked = !category.clicked
+            if (category.clicked) {
                 binding.ivMealCategoryPicture.setBackgroundResource(R.drawable.meal_picture_selected_back)
             } else {
                 binding.ivMealCategoryPicture.setBackgroundResource(

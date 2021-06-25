@@ -39,3 +39,13 @@ f
 6app/src/main/res/drawable/layout_meal_details_back.xml,f\b\fbcb488bc7e9bbbb883c2c0543e8b522f069e0ac
 Y
 )app/src/main/res/navigation/nav_graph.xml,b\a\baffce053da291d96fb575a09f2bbe9aaa9c4be9
+”
+dapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/util/AutoClearedValue.kt,8\f\8f561b34d71c25caf4e3c8698d064fbd33ed2993
+Ž
+^app/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/util/Extensions.kt,7\f\7f4d20c47746dc7babe65edcbbeb64981da22c9c
+a
+1app/src/main/res/layout/fragment_meal_details.xml,9\e\9e90b4c41fba543b1e8bf4e20bbb56ee7a325cd5
+—
+gapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/util/ViewBindingFragment.kt,2\c\2c700839efabda869da44e1acbd3cda3873019bd
+U
+%app/src/main/res/drawable/ic_sort.xml,f\5\f50cb3bc6ed14c2c0f84b73c4e6162145891374c

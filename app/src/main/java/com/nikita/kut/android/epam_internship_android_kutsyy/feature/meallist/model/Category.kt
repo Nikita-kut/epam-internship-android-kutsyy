@@ -6,5 +6,5 @@ import kotlin.random.Random
 data class Category(
     val id: Int = Random.nextInt(),
     @DrawableRes val categoryPicture: Int,
-    var clickCount: Int = 1,
+    var clicked: Boolean = false
 )
