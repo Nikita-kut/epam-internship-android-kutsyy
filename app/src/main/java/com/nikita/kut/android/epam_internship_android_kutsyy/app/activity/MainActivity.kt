@@ -13,19 +13,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        if (savedInstanceState == null) openFragment()
-    }
-
-    private fun openFragment() {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(
-                binding.activityMainContainer.id,
-                MainFragment.newInstance(),
-                MainFragment.MAIN_FRAGMENT_TAG
-            )
-            .commit()
     }
 
     override fun onBackPressed() {

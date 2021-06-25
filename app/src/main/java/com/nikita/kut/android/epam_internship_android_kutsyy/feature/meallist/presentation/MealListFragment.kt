@@ -1,22 +1,27 @@
 package com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.presentation.MealDetailsFragment
+import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.MealAdapter
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.AutoClearedValue
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.ViewBindingFragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealListBinding
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.presentation.MealDetailsFragment
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Category
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Meal
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.CategoryAdapter
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.MealAdapter
 
-class MealListFragment : Fragment(), MealAdapter.OnMealItemClickListener {
+class MealListFragment :
+    ViewBindingFragment<FragmentMealListBinding>(FragmentMealListBinding::inflate),
+    MealAdapter.OnMealItemClickListener,
+    CategoryAdapter.OnCategoryItemClickListener {
 
-    private lateinit var binding: FragmentMealListBinding
-    private val mealAdapter: MealAdapter
-        get() = binding.rvMealList.adapter as MealAdapter
+    private var mealAdapter by AutoClearedValue<MealAdapter>()
+
+    private var categoryAdapter by AutoClearedValue<CategoryAdapter>()
 
     private val meals: List<Meal> = listOf(
         Meal(
@@ -57,24 +62,25 @@ class MealListFragment : Fragment(), MealAdapter.OnMealItemClickListener {
         )
     )
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentMealListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private val categories: List<Category> = listOf(
+        Category(categoryPicture = R.drawable.beef),
+        Category(categoryPicture = R.drawable.desert),
+        Category(categoryPicture = R.drawable.pizza),
+        Category(categoryPicture = R.drawable.pita),
+        Category(categoryPicture = R.drawable.chicken),
+        )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecyclerView()
+        initRVMealList()
+        initRVCategoryList()
     }
 
 
-    private fun initRecyclerView() {
+    private fun initRVMealList() {
+        mealAdapter = MealAdapter()
         with(binding.rvMealList) {
-            adapter = MealAdapter()
+            adapter = mealAdapter
             mealAdapter.setClickListener(this@MealListFragment)
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
@@ -82,8 +88,23 @@ class MealListFragment : Fragment(), MealAdapter.OnMealItemClickListener {
         mealAdapter.updateList(meals)
     }
 
+    private fun initRVCategoryList() {
+        categoryAdapter = CategoryAdapter()
+        with(binding.rvMealCategory) {
+            adapter = categoryAdapter
+            categoryAdapter.setClickListener(this@MealListFragment)
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            setHasFixedSize(true)
+        }
+        categoryAdapter.updateCategoryList(categories)
+    }
+
     override fun onItemClick(meal: Meal) {
         openFragment(meal)
+    }
+
+    override fun onCategoryClick(category: Category) {
+        //ToDo
     }
 
     private fun openFragment(meal: Meal) {
