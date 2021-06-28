@@ -29,10 +29,6 @@ yapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature
 app/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature/meallist/presentation/adapter/CategoryHolder.kt,d\7\d7f6ecf60bdfafbd18077328cb11902a0eed96ef
 š
 japp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature/meallist/model/Category.kt,a\2\a2cea10ebffea1785b6a5a9a6aea1f7369b28b24
-R
-"app/src/main/res/values/dimens.xml,c\3\c3c1811dec2dbad2deeafb9aad505ca9631da740
-Q
-!app/src/main/res/values/fonts.xml,e\5\e51eb7474bf863ec209e6e030d289f07bdec2520
 Y
 )app/src/main/res/layout/activity_main.xml,7\6\76b07e40f24cce093536731477540f12e7da3cb6
 f
