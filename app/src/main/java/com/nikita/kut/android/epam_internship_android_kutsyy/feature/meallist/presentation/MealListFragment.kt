@@ -10,6 +10,7 @@ import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.ViewBindin
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealListBinding
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.presentation.MealDetailsFragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Category
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.CategoryList
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Meal
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.CategoryAdapter
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.MealAdapter
@@ -62,20 +63,22 @@ class MealListFragment :
         )
     )
 
-    private val categories: List<Category> = listOf(
-        Category(categoryPicture = R.drawable.beef),
-        Category(categoryPicture = R.drawable.desert),
-        Category(categoryPicture = R.drawable.pizza),
-        Category(categoryPicture = R.drawable.pita),
-        Category(categoryPicture = R.drawable.chicken),
+    private var categories: CategoryList = CategoryList(
+        listOf(
+            Category(id = 1, "dsd", ""),
+            Category(id = 2, "dsd", ""),
+            Category(id = 3, "dsd", ""),
+            Category(id = 4, "dsd", ""),
+            Category(id = 5, "dsd", ""),
+            Category(id = 6, "dsd", ""),
         )
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRVMealList()
         initRVCategoryList()
     }
-
 
     private fun initRVMealList() {
         mealAdapter = MealAdapter()
@@ -96,7 +99,7 @@ class MealListFragment :
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             setHasFixedSize(true)
         }
-        categoryAdapter.updateCategoryList(categories)
+        categoryAdapter.updateCategoryList(categories.categories)
     }
 
     override fun onItemClick(meal: Meal) {
@@ -104,7 +107,9 @@ class MealListFragment :
     }
 
     override fun onCategoryClick(category: Category) {
-        //ToDo
+        categories.categories.forEach { if (it != category) it.clicked = false }
+        categoryAdapter.updateCategoryList(categories.categories)
+        categoryAdapter.notifyDataSetChanged()
     }
 
     private fun openFragment(meal: Meal) {

@@ -18,15 +18,18 @@ class CategoryHolder(view: View) : RecyclerView.ViewHolder(view) {
             .dontAnimate()
             .into(binding.ivMealCategoryPicture)
         this.listener = listener
-        itemView.setOnClickListener {
-            category.clicked = !category.clicked
-            if (category.clicked) {
-                binding.ivMealCategoryPicture.setBackgroundResource(R.drawable.meal_picture_selected_back)
-            } else {
-                binding.ivMealCategoryPicture.setBackgroundResource(
-                    R.drawable.meal_picture_back
-                )
-            }
+        binding.root.setOnClickListener {
+            category.clicked = category.clicked.not()
+            listener.onCategoryClick(category)
+        }
+        setItemBackgroundColor(category.clicked)
+    }
+
+    private fun setItemBackgroundColor(clicked: Boolean) {
+        if (clicked) {
+            binding.ivMealCategoryPicture.setBackgroundResource(R.drawable.meal_picture_selected_back)
+        } else {
+            binding.ivMealCategoryPicture.setBackgroundResource(R.drawable.meal_picture_back)
         }
     }
 }

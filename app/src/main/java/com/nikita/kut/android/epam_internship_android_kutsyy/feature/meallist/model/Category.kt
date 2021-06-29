@@ -7,7 +7,9 @@ import kotlin.random.Random
 data class Category(
     @SerializedName(value = "idCategory")
     val id: Int,
-    @SerializedName(value = "")
+    @SerializedName(value = "strCategory")
+    val categoryName: String,
+    @SerializedName(value = "strCategoryThumb")
     val categoryPicture: String,
     var clicked: Boolean = false
 )

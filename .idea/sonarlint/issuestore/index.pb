@@ -45,3 +45,9 @@ a
 gapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/util/ViewBindingFragment.kt,2\c\2c700839efabda869da44e1acbd3cda3873019bd
 U
 %app/src/main/res/drawable/ic_sort.xml,f\5\f50cb3bc6ed14c2c0f84b73c4e6162145891374c
+ž
+napp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature/meallist/model/CategoryList.kt,7\2\72be29d30fe6407e783f3ff9ef3c66fdeb4de122
+“
+capp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/data/network/MealApi.kt,4\4\4495965c8f9d729e205d06a751bc0f227f7678e3
+–
+fapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/data/network/MealLoader.kt,b\1\b18dcf100cf30f149a945955fbc1dfca789de7da
