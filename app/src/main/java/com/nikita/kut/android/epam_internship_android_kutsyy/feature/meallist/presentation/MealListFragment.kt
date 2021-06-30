@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
@@ -70,6 +71,10 @@ class MealListFragment :
             adapter = mealAdapter
             mealAdapter.setClickListener(this@MealListFragment)
             layoutManager = LinearLayoutManager(requireContext())
+            val itemDecoration =
+                DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+            itemDecoration.setDrawable(resources.getDrawable(R.drawable.meal_list_divider))
+            addItemDecoration(itemDecoration)
             setHasFixedSize(true)
         }
     }

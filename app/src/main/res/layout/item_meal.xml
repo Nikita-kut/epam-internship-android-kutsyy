@@ -12,10 +12,11 @@
         android:id="@+id/iv_item_meal_picture"
         android:layout_width="@dimen/item_side"
         android:layout_height="@dimen/item_side"
+        android:background="@drawable/item_meal_background"
         android:scaleType="centerCrop"
-        android:src="@drawable/meal_example_1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/meal_example_1" />
 
     <TextView
         android:id="@+id/tv_item_meal_name"
