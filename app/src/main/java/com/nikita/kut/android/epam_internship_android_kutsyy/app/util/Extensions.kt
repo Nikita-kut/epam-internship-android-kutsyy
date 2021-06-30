@@ -25,15 +25,6 @@ fun ImageView.setImage(URI: String) {
         .into(this)
 }
 
-fun ImageView.setImageMealDetails(URI: String) {
-    Glide.with(this.context)
-        .load(URI)
-        .apply(RequestOptions())
-        .placeholder(R.drawable.loading_animation)
-        .error(R.drawable.ic_add_photo)
-        .into(this)
-}
-
 fun MealDetails.getMealDetailsUIModel(): MealDetailsUIModel {
     val ingredientsMap = mapOf(
         ingredient1 to measure1,
