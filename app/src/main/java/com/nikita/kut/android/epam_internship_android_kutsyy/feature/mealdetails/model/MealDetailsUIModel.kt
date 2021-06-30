@@ -6,6 +6,6 @@ data class MealDetailsUIModel(
     val mealCategory: String,
     val mealArea: String,
     val mealPicture: String,
-    val mealTag: String,
+    val mealTag: String?,
     val mealIngredients: String
 )

@@ -14,7 +14,7 @@ data class MealDetails(
     @SerializedName(value = "strMealThumb")
     val mealPicture: String,
     @SerializedName(value = "strTags")
-    val mealTag: String,
+    val mealTag: String?,
     @SerializedName(value = "strIngredient1")
     val ingredient1: String?,
     @SerializedName(value = "strIngredient2")
