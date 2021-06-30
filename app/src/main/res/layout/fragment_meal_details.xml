@@ -15,7 +15,8 @@
             android:id="@+id/app_bar_meal_details"
             android:layout_width="match_parent"
             android:layout_height="@dimen/meal_details_pic_size"
-            android:fitsSystemWindows="true">
+            android:fitsSystemWindows="true"
+            android:background="@color/white">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"

@@ -24,6 +24,8 @@ class MealListFragment :
     MealAdapter.OnMealItemClickListener,
     CategoryAdapter.OnCategoryItemClickListener {
 
+    private val repository = MealListRepository()
+
     private var mealAdapter by AutoClearedValue<MealAdapter>()
 
     private var categoryAdapter by AutoClearedValue<CategoryAdapter>()
@@ -31,8 +33,6 @@ class MealListFragment :
     private lateinit var meals: MealList
 
     private lateinit var categories: CategoryList
-
-    private val repository = MealListRepository()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

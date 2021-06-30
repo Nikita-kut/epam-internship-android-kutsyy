@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.repository.MealDetailsRepository
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.ViewBindingFragment
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.getMealDetailsUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.setImageMealDetails
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealDetailsBinding
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.model.RemoteMealDetails
@@ -45,11 +46,13 @@ class MealDetailsFragment :
 
     private fun initViews() {
         val mealDetails = remoteMealDetails.mealDetails.first()
+        val mealDetailsUIModel = mealDetails.getMealDetailsUIModel()
         with(binding) {
-            ivMealDetailsMainPic.setImageMealDetails(mealDetails.mealPicture)
-            tvMealCategory.text = mealDetails.mealArea
-            tvMealName.text = mealDetails.mealName
-            tvMealTag.text = mealDetails.mealTag
+            ivMealDetailsMainPic.setImageMealDetails(mealDetailsUIModel.mealPicture)
+            tvMealCategory.text = mealDetailsUIModel.mealArea
+            tvMealName.text = mealDetailsUIModel.mealName
+            tvMealTag.text = mealDetailsUIModel.mealTag
+            tvMealIngredients.text = mealDetailsUIModel.mealIngredients
         }
     }
 

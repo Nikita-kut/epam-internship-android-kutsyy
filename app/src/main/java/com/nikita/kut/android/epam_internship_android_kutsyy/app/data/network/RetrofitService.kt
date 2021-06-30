@@ -8,7 +8,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface RetrofitService {
-
     @GET(value = "categories.php")
     fun getCategories(): Call<CategoryList>
 

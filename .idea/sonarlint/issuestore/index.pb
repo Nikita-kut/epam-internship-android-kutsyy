@@ -51,3 +51,17 @@ japp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/dat
 lapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/repository/MealListRepository.kt,7\3\7309b733670b93b722f98cb3d3087013afbca286
 š
 japp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature/meallist/model/MealList.kt,f\4\f48325643cc963d810a3105e458b15115f0008b7
+R
+"app/src/main/res/values/dimens.xml,c\3\c3c1811dec2dbad2deeafb9aad505ca9631da740
+Z
+*app/src/main/res/drawable/ic_add_photo.xml,8\f\8fd43697b34d1dedc55b68a3f3c2b41100de5647
+_
+/app/src/main/res/drawable/loading_animation.xml,9\3\933a95abf735e2efc813c4219974312457c0628a
+Y
+)app/src/main/res/drawable/loading_img.xml,4\0\40433a0cc9d67b805acdb024104a878b7502314a
+ 
+papp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature/mealdetails/model/MealDetails.kt,a\5\a5b87898d9b8e7f43df118e0f04858671129c08d
+¦
+vapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature/mealdetails/model/RemoteMealDetails.kt,b\0\b07b0d2e6225cfa825d04bfbc18986fe67987bba
+Ÿ
+oapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/repository/MealDetailsRepository.kt,1\9\19202363f019ab984cb02415c3006d14d65adfe2
