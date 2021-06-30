@@ -14,4 +14,6 @@
 
     <dimen name="item_side">100dp</dimen>
 
+    <dimen name="meal_details_pic_size">360dp</dimen>
+
 </resources>

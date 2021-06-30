@@ -2,14 +2,16 @@ package com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.m
 
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kotlin.random.Random
 
 @Parcelize
 data class Meal(
-    val id: Int = Random.nextInt(),
-    @DrawableRes val mealPicture: Int,
+    @SerializedName("idMeal")
+    val id: Int,
+    @SerializedName(value = "strMealThumb")
+    val mealPicture: String,
+    @SerializedName(value = "strMeal")
     val name: String,
-    val category: String,
-    val tag: String
 ): Parcelable

@@ -1,4 +1,4 @@
-package com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter
+package com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.category
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer

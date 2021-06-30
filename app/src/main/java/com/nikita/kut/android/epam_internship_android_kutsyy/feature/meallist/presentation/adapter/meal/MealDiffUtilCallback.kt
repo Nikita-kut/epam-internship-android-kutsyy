@@ -1,4 +1,4 @@
-package com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter
+package com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.meal
 
 import androidx.recyclerview.widget.DiffUtil
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Meal
