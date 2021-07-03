@@ -1,8 +1,8 @@
-package com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.model
+package com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.mealdetails
 
 import com.google.gson.annotations.SerializedName
 
-data class MealDetails(
+data class RemoteMealDetails(
     @SerializedName(value = "idMeal")
     val id: Int,
     @SerializedName(value = "strMeal")

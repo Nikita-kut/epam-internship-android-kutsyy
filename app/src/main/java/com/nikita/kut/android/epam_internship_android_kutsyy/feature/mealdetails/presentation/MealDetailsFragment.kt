@@ -8,17 +8,17 @@ import androidx.core.os.bundleOf
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.repository.MealDetailsRepository
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.ViewBindingFragment
-import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.getMealDetailsUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.setImage
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.toMealDetailsUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealDetailsBinding
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.model.RemoteMealDetails
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.model.MealDetailsUIModel
 
 class MealDetailsFragment :
     ViewBindingFragment<FragmentMealDetailsBinding>(FragmentMealDetailsBinding::inflate) {
 
     private val repository = MealDetailsRepository()
 
-    private lateinit var remoteMealDetails: RemoteMealDetails
+    private lateinit var mealDetailsUIModel: MealDetailsUIModel
 
     private val mealId: Int by lazy { requireArguments().getInt(KEY_MEAL_ID) }
 
@@ -31,10 +31,11 @@ class MealDetailsFragment :
     }
 
     private fun initViewsFromNetwork() {
-        repository.initMealDetailsFromNetwork(
+        repository.fetchMealDetails(
             mealId = mealId,
             onComplete = { remoteMealDetails ->
-                this.remoteMealDetails = remoteMealDetails
+                mealDetailsUIModel = remoteMealDetails.mealDetails.first().toMealDetailsUIModel()
+
                 initViews()
             },
             onError = { t ->
@@ -45,8 +46,6 @@ class MealDetailsFragment :
     }
 
     private fun initViews() {
-        val mealDetails = remoteMealDetails.mealDetails.first()
-        val mealDetailsUIModel = mealDetails.getMealDetailsUIModel()
         with(binding) {
             ivMealDetailsMainPic.setImage(mealDetailsUIModel.mealPicture)
             tvMealCategory.text = mealDetailsUIModel.mealArea

@@ -1,8 +1,8 @@
 package com.nikita.kut.android.epam_internship_android_kutsyy.app.repository
 
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.network.RetrofitClient
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.CategoryList
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.MealList
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.category.RemoteCategoryList
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.meal.RemoteMealList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -10,51 +10,51 @@ import java.lang.RuntimeException
 
 class MealListRepository {
 
-    fun initMealListFromNetwork(
+    fun fetchMeals(
         categoryName: String,
-        onComplete: (MealList) -> Unit,
+        onComplete: (RemoteMealList) -> Unit,
         onError: (Throwable) -> Unit
     ) {
         RetrofitClient.retrofitService.getMeals(categoryName).enqueue(
-            object : Callback<MealList> {
+            object : Callback<RemoteMealList> {
 
                 override fun onResponse(
-                    call: Call<MealList>,
-                    response: Response<MealList>
+                    call: Call<RemoteMealList>,
+                    response: Response<RemoteMealList>
                 ) {
                     if (response.isSuccessful) {
-                        onComplete(response.body() ?: MealList(listOf()))
+                        onComplete(response.body() ?: RemoteMealList(listOf()))
                     } else {
                         onError(RuntimeException("Incorrect status code"))
                     }
                 }
 
-                override fun onFailure(call: Call<MealList>, t: Throwable) {
+                override fun onFailure(call: Call<RemoteMealList>, t: Throwable) {
                     onError(t)
                 }
             }
         )
     }
 
-    fun initMealCategoriesFromNetwork(
-        onComplete: (CategoryList) -> Unit,
+    fun fetchCategories(
+        onComplete: (RemoteCategoryList) -> Unit,
         onError: (Throwable) -> Unit
     ) {
         RetrofitClient.retrofitService.getCategories().enqueue(
-            object : Callback<CategoryList> {
+            object : Callback<RemoteCategoryList> {
 
                 override fun onResponse(
-                    call: Call<CategoryList>,
-                    response: Response<CategoryList>
+                    call: Call<RemoteCategoryList>,
+                    response: Response<RemoteCategoryList>
                 ) {
                     if (response.isSuccessful) {
-                        onComplete(response.body() ?: CategoryList((listOf())))
+                        onComplete(response.body() ?: RemoteCategoryList((listOf())))
                     } else {
                         onError(RuntimeException("Incorrect status code"))
                     }
                 }
 
-                override fun onFailure(call: Call<CategoryList>, t: Throwable) {
+                override fun onFailure(call: Call<RemoteCategoryList>, t: Throwable) {
                     onError(t)
                 }
             }

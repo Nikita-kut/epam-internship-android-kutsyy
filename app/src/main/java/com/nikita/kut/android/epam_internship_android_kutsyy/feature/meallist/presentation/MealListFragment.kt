@@ -13,10 +13,10 @@ import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.AutoCleare
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.ViewBindingFragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealListBinding
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.presentation.MealDetailsFragment
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Category
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.CategoryList
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Meal
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.MealList
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.toListCategoryUIModel
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.toListMealUIModel
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.CategoryUIModel
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.MealUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.category.CategoryAdapter
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.meal.MealAdapter
 
@@ -31,9 +31,9 @@ class MealListFragment :
 
     private var categoryAdapter by AutoClearedValue<CategoryAdapter>()
 
-    private lateinit var meals: MealList
+    private lateinit var meals: List<MealUIModel>
 
-    private lateinit var categories: CategoryList
+    private var categories: List<CategoryUIModel> = listOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,9 +42,9 @@ class MealListFragment :
     }
 
     private fun initCategoriesFromNetwork() {
-        repository.initMealCategoriesFromNetwork(
+        repository.fetchCategories(
             onComplete = { categoryList ->
-                this.categories = categoryList
+                this.categories = categoryList.toListCategoryUIModel()
                 initRVCategoryList()
             },
             onError = { t ->
@@ -62,7 +62,7 @@ class MealListFragment :
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             setHasFixedSize(true)
         }
-        categoryAdapter.updateCategoryList(categories.categories)
+        categoryAdapter.updateCategoryList(categories)
     }
 
     private fun initRVMealList() {
@@ -79,15 +79,16 @@ class MealListFragment :
         }
     }
 
-    override fun onCategoryClick(category: Category) {
-        categories.categories.forEach { if (it != category) it.clicked = false }
-        categoryAdapter.updateCategoryList(categories.categories)
+    override fun onCategoryClick(category: CategoryUIModel) {
+        category.isSelected = category.isSelected.not()
+        categories.forEach { if (it != category) it.isSelected = false }
+        categoryAdapter.updateCategoryList(categories)
         categoryAdapter.notifyDataSetChanged()
-        repository.initMealListFromNetwork(
+        repository.fetchMeals(
             categoryName = category.categoryName,
             onComplete = { mealList ->
-                this.meals = mealList
-                mealAdapter.updateList(meals.meals)
+                this.meals = mealList.toListMealUIModel()
+                mealAdapter.updateList(meals)
             },
             onError = { t ->
                 Log.e("Server", "enqueue request error = ${t.message}", t)
@@ -96,7 +97,7 @@ class MealListFragment :
         )
     }
 
-    override fun onItemClick(meal: Meal) {
+    override fun onItemClick(meal: MealUIModel) {
         openFragment(meal.id)
     }
 

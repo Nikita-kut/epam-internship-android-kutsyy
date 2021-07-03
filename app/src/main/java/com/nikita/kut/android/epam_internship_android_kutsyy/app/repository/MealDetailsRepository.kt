@@ -1,7 +1,7 @@
 package com.nikita.kut.android.epam_internship_android_kutsyy.app.repository
 
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.network.RetrofitClient
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.model.RemoteMealDetails
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.mealdetails.RemoteMealDetailsList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -9,26 +9,26 @@ import java.lang.RuntimeException
 
 class MealDetailsRepository {
 
-    fun initMealDetailsFromNetwork(
+    fun fetchMealDetails(
         mealId: Int,
-        onComplete: (RemoteMealDetails) -> Unit,
+        onComplete: (RemoteMealDetailsList) -> Unit,
         onError: (Throwable) -> Unit
     ) {
         RetrofitClient.retrofitService.getMealDetails(mealId).enqueue(
-            object : Callback<RemoteMealDetails> {
+            object : Callback<RemoteMealDetailsList> {
 
                 override fun onResponse(
-                    call: Call<RemoteMealDetails>,
-                    response: Response<RemoteMealDetails>
+                    call: Call<RemoteMealDetailsList>,
+                    response: Response<RemoteMealDetailsList>
                 ) {
                     if (response.isSuccessful) {
-                        onComplete(response.body() ?: RemoteMealDetails(listOf()))
+                        onComplete(response.body() ?: RemoteMealDetailsList(listOf()))
                     } else {
                         onError(RuntimeException("Incorrect status code"))
                     }
                 }
 
-                override fun onFailure(call: Call<RemoteMealDetails>, t: Throwable) {
+                override fun onFailure(call: Call<RemoteMealDetailsList>, t: Throwable) {
                     onError(t)
                 }
             }

@@ -5,27 +5,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.setImage
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.ItemCategoryBinding
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Category
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.CategoryUIModel
 
-class CategoryHolder(view: View) : RecyclerView.ViewHolder(view) {
+class CategoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemCategoryBinding.bind(view)
     lateinit var listener: CategoryAdapter.OnCategoryItemClickListener
 
-    fun bind(category: Category, listener: CategoryAdapter.OnCategoryItemClickListener) {
+    fun bind(category: CategoryUIModel, listener: CategoryAdapter.OnCategoryItemClickListener) {
         with(binding) {
             ivMealCategoryPicture.setImage(category.categoryPicture)
-            this@CategoryHolder.listener = listener
+            this@CategoryViewHolder.listener = listener
             root.setOnClickListener {
-                category.clicked = category.clicked.not()
                 listener.onCategoryClick(category)
             }
-            setItemBackgroundColor(category.clicked)
+            setItemBackgroundColor(category.isSelected)
         }
     }
 
-    private fun setItemBackgroundColor(clicked: Boolean) {
-        if (clicked) {
+    private fun setItemBackgroundColor(isSelected: Boolean) {
+        if (isSelected) {
             binding.ivMealCategoryPicture.setBackgroundResource(R.drawable.meal_picture_selected_back)
         } else {
             binding.ivMealCategoryPicture.setBackgroundResource(R.drawable.meal_picture_back)

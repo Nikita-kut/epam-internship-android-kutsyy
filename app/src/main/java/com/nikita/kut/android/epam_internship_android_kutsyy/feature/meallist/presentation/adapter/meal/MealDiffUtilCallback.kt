@@ -1,10 +1,11 @@
 package com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.meal
 
 import androidx.recyclerview.widget.DiffUtil
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.Meal
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.meal.RemoteMeal
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.MealUIModel
 
-class MealDiffUtilCallback : DiffUtil.ItemCallback<Meal>() {
-    override fun areItemsTheSame(oldItem: Meal, newItem: Meal): Boolean = oldItem.id == newItem.id
+class MealDiffUtilCallback : DiffUtil.ItemCallback<MealUIModel>() {
+    override fun areItemsTheSame(oldItem: MealUIModel, newItem: MealUIModel): Boolean = oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: Meal, newItem: Meal): Boolean = oldItem == newItem
+    override fun areContentsTheSame(oldItem: MealUIModel, newItem: MealUIModel): Boolean = oldItem == newItem
 }

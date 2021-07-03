@@ -1,31 +1,30 @@
 package com.nikita.kut.android.epam_internship_android_kutsyy.app.util
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.annotation.LayoutRes
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.common.base.Joiner
-import com.nikita.kut.android.epam_internship_android_kutsyy.R
-import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.model.MealDetails
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.category.RemoteCategoryList
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.meal.RemoteMealList
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.mealdetails.RemoteMealDetails
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.model.MealDetailsUIModel
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.CategoryUIModel
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.MealUIModel
 
-fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
-    return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
+fun RemoteMealList.toListMealUIModel(): List<MealUIModel> {
+    val mealList = mutableListOf<MealUIModel>()
+    for (i in this.meals) {
+        mealList.add(MealUIModel(i.id, i.mealPicture, i.name))
+    }
+    return mealList
 }
 
-fun ImageView.setImage(URI: String) {
-    Glide.with(this.context)
-        .load(URI)
-        .apply(RequestOptions())
-        .placeholder(R.drawable.loading_animation)
-        .error(R.drawable.ic_add_photo)
-        .into(this)
+fun RemoteCategoryList.toListCategoryUIModel(): List<CategoryUIModel> {
+    val categoryList = mutableListOf<CategoryUIModel>()
+    for (i in this.categories) {
+        categoryList.add(CategoryUIModel(i.id, i.categoryName, i.categoryPicture))
+    }
+    return categoryList.toList()
 }
 
-fun MealDetails.getMealDetailsUIModel(): MealDetailsUIModel {
+fun RemoteMealDetails.toMealDetailsUIModel(): MealDetailsUIModel {
     val ingredientsMap = mapOf(
         ingredient1 to measure1,
         ingredient2 to measure2,
@@ -49,7 +48,8 @@ fun MealDetails.getMealDetailsUIModel(): MealDetailsUIModel {
         ingredient20 to measure20,
     )
     val filteredIngredientMap = ingredientsMap.filterKeys { !it.isNullOrEmpty() }
-    val ingredients: String = Joiner.on(",\n").withKeyValueSeparator(" ").join(filteredIngredientMap)
+    val ingredients: String =
+        Joiner.on(",\n").withKeyValueSeparator(" ").join(filteredIngredientMap)
     return MealDetailsUIModel(
         id = id,
         mealName = mealName,

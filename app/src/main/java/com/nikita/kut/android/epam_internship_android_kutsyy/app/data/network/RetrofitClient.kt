@@ -5,21 +5,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private val BASE_URL = "https://www.themealdb.com/api/json/v1/1/"
+    private const val BASE_URL = "https://www.themealdb.com/api/json/v1/1/"
 
-    private var retrofitClient: Retrofit? = null
-
-    private fun getRetrofitClient(baseUrl: String): Retrofit {
-        if (retrofitClient == null) {
-            retrofitClient = Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        }
-        return retrofitClient ?: error("Retrofit init eror")
+    private val retrofitClient: Retrofit by lazy {
+        getRetrofitClient(BASE_URL)
     }
 
     val retrofitService: RetrofitService
-        get() = getRetrofitClient(BASE_URL).create(RetrofitService::class.java)
+        get() = retrofitClient.create(RetrofitService::class.java)
 
+    private fun getRetrofitClient(baseUrl: String): Retrofit = Retrofit.Builder()
+        .baseUrl(baseUrl)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 }
