@@ -33,10 +33,11 @@ class MealListFragment :
 
     private lateinit var meals: List<MealUIModel>
 
-    private var categories: List<CategoryUIModel> = listOf()
+    private lateinit var categories: List<CategoryUIModel>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRVCategoryList()
         initCategoriesFromNetwork()
         initRVMealList()
     }
@@ -45,7 +46,7 @@ class MealListFragment :
         repository.fetchCategories(
             onComplete = { categoryList ->
                 this.categories = categoryList.toListCategoryUIModel()
-                initRVCategoryList()
+                categoryAdapter.updateCategoryList(categories)
             },
             onError = { t ->
                 Log.e("Server", "enqueue request error = ${t.message}", t)
@@ -62,7 +63,6 @@ class MealListFragment :
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             setHasFixedSize(true)
         }
-        categoryAdapter.updateCategoryList(categories)
     }
 
     private fun initRVMealList() {

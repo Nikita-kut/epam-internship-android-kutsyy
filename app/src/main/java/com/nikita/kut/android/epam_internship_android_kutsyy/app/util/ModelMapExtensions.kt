@@ -56,7 +56,7 @@ fun RemoteMealDetails.toMealDetailsUIModel(): MealDetailsUIModel {
         mealCategory = mealCategory,
         mealArea = mealArea,
         mealPicture = mealPicture,
-        mealTag = mealTag,
+        mealTags = mealTag?.split(",") ?: listOf(),
         mealIngredients = ingredients
     )
 }

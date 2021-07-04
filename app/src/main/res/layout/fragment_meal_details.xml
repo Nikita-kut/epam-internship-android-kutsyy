@@ -78,26 +78,24 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_meal_category"
                     tools:text="Teriyaki Chicken Casserole" />
 
-                <TextView
-                    android:id="@+id/tv_meal_tag"
-                    style="@style/TextStyleMealDetails.MealTag"
-                    android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_tag_list"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:background="@drawable/meal_tag_background"
-                    android:gravity="center"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_meal_name"
-                    tools:text="Meat" />
+                    app:layout_constraintBottom_toTopOf="@id/separator"
+                    tools:listitem="@layout/item_tag"
+                    tools:itemCount="1"/>
 
                 <ImageView
                     android:id="@+id/separator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_24"
+                    android:layout_marginTop="@dimen/margin"
                     android:src="@drawable/separator"
-                    app:layout_constraintTop_toBottomOf="@id/tv_meal_tag" />
+                    app:layout_constraintTop_toBottomOf="@id/rv_tag_list" />
 
                 <TextView
                     android:id="@+id/tv_ingredients_head"

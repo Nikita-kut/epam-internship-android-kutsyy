@@ -5,13 +5,17 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.repository.MealDetailsRepository
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.AutoClearedValue
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.ViewBindingFragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.setImage
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.toMealDetailsUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealDetailsBinding
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.model.MealDetailsUIModel
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.presentation.adapter.TagAdapter
 
 class MealDetailsFragment :
     ViewBindingFragment<FragmentMealDetailsBinding>(FragmentMealDetailsBinding::inflate) {
@@ -22,8 +26,11 @@ class MealDetailsFragment :
 
     private val mealId: Int by lazy { requireArguments().getInt(KEY_MEAL_ID) }
 
+    private var tagAdapter by AutoClearedValue<TagAdapter>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRVTagList()
         initViewsFromNetwork()
         binding.toolbarMealDetails.setNavigationOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
@@ -35,7 +42,6 @@ class MealDetailsFragment :
             mealId = mealId,
             onComplete = { remoteMealDetails ->
                 mealDetailsUIModel = remoteMealDetails.mealDetails.first().toMealDetailsUIModel()
-
                 initViews()
             },
             onError = { t ->
@@ -50,13 +56,22 @@ class MealDetailsFragment :
             ivMealDetailsMainPic.setImage(mealDetailsUIModel.mealPicture)
             tvMealCategory.text = mealDetailsUIModel.mealArea
             tvMealName.text = mealDetailsUIModel.mealName
-            tvMealTag.text = mealDetailsUIModel.mealTag
+            tagAdapter.updateTagList(mealDetailsUIModel.mealTags)
             tvMealIngredients.text = mealDetailsUIModel.mealIngredients
         }
     }
 
     private fun toast(text: String) {
         Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun initRVTagList() {
+        tagAdapter = TagAdapter()
+        with(binding.rvTagList) {
+            adapter = tagAdapter
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            setHasFixedSize(true)
+        }
     }
 
     companion object {
