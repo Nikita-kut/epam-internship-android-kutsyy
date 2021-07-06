@@ -8,7 +8,8 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
-import com.nikita.kut.android.epam_internship_android_kutsyy.app.repository.MealDetailsRepository
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.repository.CategoryRepository
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.repository.MealRepository
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.AutoClearedValue
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.ViewBindingFragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.setImage
@@ -20,11 +21,7 @@ import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails
 class MealDetailsFragment :
     ViewBindingFragment<FragmentMealDetailsBinding>(FragmentMealDetailsBinding::inflate) {
 
-    private val repository = MealDetailsRepository()
-
-    private lateinit var mealDetailsUIModel: MealDetailsUIModel
-
-    private val mealId: Int by lazy { requireArguments().getInt(KEY_MEAL_ID) }
+    private val repository = MealRepository()
 
     private var tagAdapter by AutoClearedValue<TagAdapter>()
 
@@ -38,11 +35,12 @@ class MealDetailsFragment :
     }
 
     private fun initViewsFromNetwork() {
+        val mealId = requireArguments().getInt(KEY_MEAL_ID)
         repository.fetchMealDetails(
             mealId = mealId,
             onComplete = { remoteMealDetails ->
-                mealDetailsUIModel = remoteMealDetails.mealDetails.first().toMealDetailsUIModel()
-                initViews()
+                val mealDetailsUIModel = remoteMealDetails.mealDetails.first().toMealDetailsUIModel()
+                initViews(mealDetailsUIModel)
             },
             onError = { t ->
                 Log.e("Server", "enqueue request error = ${t.message}", t)
@@ -51,13 +49,13 @@ class MealDetailsFragment :
         )
     }
 
-    private fun initViews() {
+    private fun initViews(mealDetails: MealDetailsUIModel) {
         with(binding) {
-            ivMealDetailsMainPic.setImage(mealDetailsUIModel.mealPicture)
-            tvMealCategory.text = mealDetailsUIModel.mealArea
-            tvMealName.text = mealDetailsUIModel.mealName
-            tagAdapter.updateTagList(mealDetailsUIModel.mealTags)
-            tvMealIngredients.text = mealDetailsUIModel.mealIngredients
+            ivMealDetailsMainPic.setImage(mealDetails.mealPicture)
+            tvMealCategory.text = mealDetails.mealArea
+            tvMealName.text = mealDetails.mealName
+            tagAdapter.updateTagList(mealDetails.mealTags)
+            tvMealIngredients.text = mealDetails.mealIngredients
         }
     }
 

@@ -8,12 +8,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
-import com.nikita.kut.android.epam_internship_android_kutsyy.app.repository.MealListRepository
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.repository.CategoryRepository
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.repository.MealRepository
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.AutoClearedValue
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.ViewBindingFragment
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.toListCategoryUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealListBinding
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.presentation.MealDetailsFragment
-import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.toListCategoryUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.toListMealUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.CategoryUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.MealUIModel
@@ -25,15 +26,15 @@ class MealListFragment :
     MealAdapter.OnMealItemClickListener,
     CategoryAdapter.OnCategoryItemClickListener {
 
-    private val repository = MealListRepository()
+    private val mealRepository = MealRepository()
+
+    private val categoryRepository = CategoryRepository()
 
     private var mealAdapter by AutoClearedValue<MealAdapter>()
 
     private var categoryAdapter by AutoClearedValue<CategoryAdapter>()
 
-    private lateinit var meals: List<MealUIModel>
-
-    private lateinit var categories: List<CategoryUIModel>
+    private var categories: List<CategoryUIModel>? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,10 +44,10 @@ class MealListFragment :
     }
 
     private fun initCategoriesFromNetwork() {
-        repository.fetchCategories(
+        categoryRepository.fetchCategoryList(
             onComplete = { categoryList ->
                 this.categories = categoryList.toListCategoryUIModel()
-                categoryAdapter.updateCategoryList(categories)
+                categoryAdapter.updateCategoryList(categories ?: listOf())
             },
             onError = { t ->
                 Log.e("Server", "enqueue request error = ${t.message}", t)
@@ -81,14 +82,12 @@ class MealListFragment :
 
     override fun onCategoryClick(category: CategoryUIModel) {
         category.isSelected = category.isSelected.not()
-        categories.forEach { if (it != category) it.isSelected = false }
-        categoryAdapter.updateCategoryList(categories)
-        categoryAdapter.notifyDataSetChanged()
-        repository.fetchMeals(
+        categories?.forEach { if (it != category) it.isSelected = false }
+        categoryAdapter.updateCategoryList(categories ?: listOf())
+        mealRepository.fetchMealList(
             categoryName = category.categoryName,
             onComplete = { mealList ->
-                this.meals = mealList.toListMealUIModel()
-                mealAdapter.updateList(meals)
+                mealAdapter.updateList(mealList.toListMealUIModel())
             },
             onError = { t ->
                 Log.e("Server", "enqueue request error = ${t.message}", t)

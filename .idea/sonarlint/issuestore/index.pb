@@ -9,8 +9,6 @@ f
 6app/src/main/res/drawable/layout_meal_details_back.xml,f\b\fbcb488bc7e9bbbb883c2c0543e8b522f069e0ac
 Y
 )app/src/main/res/navigation/nav_graph.xml,b\a\baffce053da291d96fb575a09f2bbe9aaa9c4be9
-”
-dapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/util/AutoClearedValue.kt,8\f\8f561b34d71c25caf4e3c8698d064fbd33ed2993
 —
 gapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/util/ViewBindingFragment.kt,2\c\2c700839efabda869da44e1acbd3cda3873019bd
 S
@@ -19,14 +17,6 @@ S
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-¡
-qapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature/meallist/model/CategoryUIModel.kt,c\8\c871bce0a14a4de43650bbcf046a20430bd2ad33
-²
-app/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature/meallist/presentation/adapter/meal/MealAdapter.kt,0\0\009bb90143ffd70c06e63bc3be77be1c6dc1d540
-Ÿ
-oapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/repository/MealDetailsRepository.kt,1\9\19202363f019ab984cb02415c3006d14d65adfe2
-»
-Šapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature/meallist/presentation/adapter/meal/MealDiffUtilCallback.kt,5\4\54f6cc55ee379df7e70c632511a4ababfb4c144b
 
 mapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature/meallist/model/MealUIModel.kt,3\d\3d9c0c24dab85d2881e65fefb67fb09f42245036
 µ
@@ -49,5 +39,13 @@ japp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/dat
 kapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/data/network/RetrofitService.kt,4\f\4fc4e95a28e8501f9ccfeb96a51cac25a9b9ca92
 ’
 bapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/util/ViewExtensions.kt,d\c\dcca7327002b13321461ca91eead10d65f16f0ad
-œ
-lapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/repository/MealListRepository.kt,7\3\7309b733670b93b722f98cb3d3087013afbca286
+§
+wapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature/mealdetails/model/MealDetailsUIModel.kt,3\4\34defa7ee0279a4d5b3d48e6dd19123548a55011
+–
+fapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/app/util/ModelMapExtensions.kt,b\f\bf34952720519f58ae72eec0287ec31c9d78f65e
+®
+~app/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature/mealdetails/presentation/adapter/TagAdapter.kt,7\1\71d50d7fcb72dca8c13122f203851d73f67d7edd
+²
+app/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature/mealdetails/presentation/adapter/TagViewHolder.kt,6\8\68c093abe0f3b55784211d636bb5ac440f8204ee
+½
+Œapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/feature/meallist/presentation/adapter/category/CategoryViewHolder.kt,6\d\6d24fc8b573c0e01177d82095134bcc7e33cf7ca

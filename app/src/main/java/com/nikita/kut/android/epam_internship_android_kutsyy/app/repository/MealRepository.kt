@@ -3,14 +3,16 @@ package com.nikita.kut.android.epam_internship_android_kutsyy.app.repository
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.network.RetrofitClient
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.category.RemoteCategoryList
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.meal.RemoteMealList
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.mealdetails.RemoteMealDetailsList
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.exception.IncorrectStatusCodeException
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.lang.RuntimeException
 
-class MealListRepository {
+class MealRepository {
 
-    fun fetchMeals(
+    fun fetchMealList(
         categoryName: String,
         onComplete: (RemoteMealList) -> Unit,
         onError: (Throwable) -> Unit
@@ -25,7 +27,7 @@ class MealListRepository {
                     if (response.isSuccessful) {
                         onComplete(response.body() ?: RemoteMealList(listOf()))
                     } else {
-                        onError(RuntimeException("Incorrect status code"))
+                        onError(IncorrectStatusCodeException("Incorrect status code"))
                     }
                 }
 
@@ -36,25 +38,26 @@ class MealListRepository {
         )
     }
 
-    fun fetchCategories(
-        onComplete: (RemoteCategoryList) -> Unit,
+    fun fetchMealDetails(
+        mealId: Int,
+        onComplete: (RemoteMealDetailsList) -> Unit,
         onError: (Throwable) -> Unit
     ) {
-        RetrofitClient.retrofitService.getCategories().enqueue(
-            object : Callback<RemoteCategoryList> {
+        RetrofitClient.retrofitService.getMealDetails(mealId).enqueue(
+            object : Callback<RemoteMealDetailsList> {
 
                 override fun onResponse(
-                    call: Call<RemoteCategoryList>,
-                    response: Response<RemoteCategoryList>
+                    call: Call<RemoteMealDetailsList>,
+                    response: Response<RemoteMealDetailsList>
                 ) {
                     if (response.isSuccessful) {
-                        onComplete(response.body() ?: RemoteCategoryList((listOf())))
+                        onComplete(response.body() ?: RemoteMealDetailsList(listOf()))
                     } else {
-                        onError(RuntimeException("Incorrect status code"))
+                        onError(IncorrectStatusCodeException("Incorrect status code"))
                     }
                 }
 
-                override fun onFailure(call: Call<RemoteCategoryList>, t: Throwable) {
+                override fun onFailure(call: Call<RemoteMealDetailsList>, t: Throwable) {
                     onError(t)
                 }
             }

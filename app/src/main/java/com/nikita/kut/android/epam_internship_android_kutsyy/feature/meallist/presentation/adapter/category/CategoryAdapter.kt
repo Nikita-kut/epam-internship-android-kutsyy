@@ -1,7 +1,6 @@
 package com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.category
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.inflate
@@ -9,7 +8,7 @@ import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.mo
 
 class CategoryAdapter : RecyclerView.Adapter<CategoryViewHolder>() {
 
-    private val differ = AsyncListDiffer(this, CategoryDiffUtilCallback())
+    private var categoryList: List<CategoryUIModel> = listOf()
 
     private lateinit var listener: OnCategoryItemClickListener
 
@@ -19,13 +18,15 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryViewHolder>() {
         )
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        holder.bind(differ.currentList[position], listener)
+        holder.bind(categoryList[position], listener)
     }
 
-    override fun getItemCount(): Int = differ.currentList.size
+    override fun getItemCount(): Int =
+        categoryList.size
 
     fun updateCategoryList(newList: List<CategoryUIModel>) {
-        differ.submitList(newList)
+        categoryList = newList
+        notifyDataSetChanged()
     }
 
     fun setClickListener(listener: OnCategoryItemClickListener) {
