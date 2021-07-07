@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="wrap_content"
     android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context=".feature.mealdetails.presentation.MealDetailsFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -14,8 +14,9 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar_meal_details"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
+            android:layout_height="@dimen/meal_details_pic_size"
+            android:fitsSystemWindows="true"
+            android:background="@color/white">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
@@ -27,11 +28,10 @@
                 <ImageView
                     android:id="@+id/iv_meal_details_main_pic"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/meal_details_pic_size"
                     android:clickable="true"
                     android:focusable="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/meal_main_pic"
                     app:layout_collapseMode="parallax" />
 
                 <androidx.appcompat.widget.Toolbar
@@ -52,8 +52,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/layout_meal_details_back"
-                >
+                android:background="@drawable/layout_meal_details_back">
 
 
                 <TextView
@@ -74,31 +73,29 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/margin"
                     android:layout_marginTop="@dimen/margin_extra_small"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_meal_category"
                     tools:text="Teriyaki Chicken Casserole" />
 
-                <TextView
-                    android:id="@+id/tv_meal_tag"
-                    style="@style/TextStyleMealDetails.MealTag"
-                    android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_tag_list"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:background="@drawable/meal_tag_background"
-                    android:gravity="center"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_meal_name"
-                    tools:text="Meat" />
+                    app:layout_constraintBottom_toTopOf="@id/separator"
+                    tools:listitem="@layout/item_tag"
+                    tools:itemCount="1"/>
 
                 <ImageView
                     android:id="@+id/separator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_24"
+                    android:layout_marginTop="@dimen/margin"
                     android:src="@drawable/separator"
-                    app:layout_constraintTop_toBottomOf="@id/tv_meal_tag" />
+                    app:layout_constraintTop_toBottomOf="@id/rv_tag_list" />
 
                 <TextView
                     android:id="@+id/tv_ingredients_head"

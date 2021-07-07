@@ -16,6 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/meal_picture_back"
-        tools:src="@drawable/beef" />
+        tools:src="@tools:sample/avatars" />
 
 </LinearLayout>
