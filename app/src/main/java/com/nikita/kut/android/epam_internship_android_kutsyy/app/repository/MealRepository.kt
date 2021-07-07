@@ -5,6 +5,12 @@ import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.cate
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.meal.RemoteMealList
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.mealdetails.RemoteMealDetailsList
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.exception.IncorrectStatusCodeException
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.toListMealUIModel
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.toMealDetailsUIModel
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.model.MealDetailsUIModel
+import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.MealUIModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,53 +20,44 @@ class MealRepository {
 
     fun fetchMealList(
         categoryName: String,
-        onComplete: (RemoteMealList) -> Unit,
+        onComplete: (List<MealUIModel>) -> Unit,
         onError: (Throwable) -> Unit
     ) {
-        RetrofitClient.retrofitService.getMeals(categoryName).enqueue(
-            object : Callback<RemoteMealList> {
-
-                override fun onResponse(
-                    call: Call<RemoteMealList>,
-                    response: Response<RemoteMealList>
-                ) {
-                    if (response.isSuccessful) {
-                        onComplete(response.body() ?: RemoteMealList(listOf()))
-                    } else {
-                        onError(IncorrectStatusCodeException("Incorrect status code"))
-                    }
-                }
-
-                override fun onFailure(call: Call<RemoteMealList>, t: Throwable) {
-                    onError(t)
-                }
+        RetrofitClient.retrofitService.getMeals(categoryName)
+            .map { remoteMealList ->
+                remoteMealList.toListMealUIModel()
             }
-        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { listMeals ->
+                    onComplete(listMeals)
+                },
+                { throwable ->
+                    onError(throwable)
+                }
+            )
     }
 
     fun fetchMealDetails(
         mealId: Int,
-        onComplete: (RemoteMealDetailsList) -> Unit,
+        onComplete: (MealDetailsUIModel) -> Unit,
         onError: (Throwable) -> Unit
     ) {
-        RetrofitClient.retrofitService.getMealDetails(mealId).enqueue(
-            object : Callback<RemoteMealDetailsList> {
 
-                override fun onResponse(
-                    call: Call<RemoteMealDetailsList>,
-                    response: Response<RemoteMealDetailsList>
-                ) {
-                    if (response.isSuccessful) {
-                        onComplete(response.body() ?: RemoteMealDetailsList(listOf()))
-                    } else {
-                        onError(IncorrectStatusCodeException("Incorrect status code"))
-                    }
-                }
-
-                override fun onFailure(call: Call<RemoteMealDetailsList>, t: Throwable) {
-                    onError(t)
-                }
+        RetrofitClient.retrofitService.getMealDetails(mealId)
+            .map { remoteMealDetailsList ->
+                remoteMealDetailsList.mealDetails.first().toMealDetailsUIModel()
             }
-        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { mealDetailsUiModel ->
+                    onComplete(mealDetailsUiModel)
+                },
+                { throwable ->
+                    onError(throwable)
+                }
+            )
     }
 }
