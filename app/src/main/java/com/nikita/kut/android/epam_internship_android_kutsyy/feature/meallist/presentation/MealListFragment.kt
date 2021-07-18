@@ -46,7 +46,7 @@ class MealListFragment :
     private fun initCategoriesFromNetwork() {
         categoryRepository.fetchCategoryList(
             onComplete = { categoryList ->
-                this.categories = categoryList.toListCategoryUIModel()
+                this.categories = categoryList
                 categoryAdapter.updateCategoryList(categories ?: listOf())
             },
             onError = { t ->
@@ -87,7 +87,7 @@ class MealListFragment :
         mealRepository.fetchMealList(
             categoryName = category.categoryName,
             onComplete = { mealList ->
-                mealAdapter.updateList(mealList.toListMealUIModel())
+                mealAdapter.updateList(mealList)
             },
             onError = { t ->
                 Log.e("Server", "enqueue request error = ${t.message}", t)

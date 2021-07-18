@@ -38,9 +38,8 @@ class MealDetailsFragment :
         val mealId = requireArguments().getInt(KEY_MEAL_ID)
         repository.fetchMealDetails(
             mealId = mealId,
-            onComplete = { remoteMealDetails ->
-                val mealDetailsUIModel = remoteMealDetails.mealDetails.first().toMealDetailsUIModel()
-                initViews(mealDetailsUIModel)
+            onComplete = { mealDetailsUiModel ->
+                initViews(mealDetailsUiModel)
             },
             onError = { t ->
                 Log.e("Server", "enqueue request error = ${t.message}", t)
