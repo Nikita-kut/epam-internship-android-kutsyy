@@ -1,8 +1,6 @@
-package com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.category
+package com.nikita.kut.android.epam_internship_android_kutsyy.app.data.network.model.category
 
-import androidx.annotation.DrawableRes
 import com.google.gson.annotations.SerializedName
-import kotlin.random.Random
 
 data class RemoteCategory(
     @SerializedName(value = "idCategory")
