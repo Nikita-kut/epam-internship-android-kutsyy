@@ -55,8 +55,8 @@ class MealListFragment :
     }
 
     private fun initCategoriesList() {
-        fetchCategoryDisposable = categoryRepository.fetchCategoryList(
-            onComplete = { categoryList ->
+        fetchCategoryDisposable = categoryRepository.fetchCategoryList().subscribe(
+            { categoryList ->
                 this.categories = categoryList
                 categoryAdapter.updateCategoryList(categories ?: listOf())
                 if (SharedPreferenceModel.preferences?.contains(LAST_SELECTED_ITEM)
@@ -67,8 +67,8 @@ class MealListFragment :
                     onCategoryClick(categoryModel)
                 }
             },
-            onError = { t ->
-                Log.e("Server", "enqueue request error = ${t.message}", t)
+            { error ->
+                Log.e("Server", "enqueue request error = ${error.message}", error)
                 toast(resources.getString(R.string.load_error))
             }
         )
@@ -104,13 +104,15 @@ class MealListFragment :
         categories?.forEach { if (it != category) it.isSelected = false }
         categoryAdapter.updateCategoryList(categories ?: listOf())
         fetchMealListDisposable = mealRepository.fetchMealList(
-            categoryName = category.categoryName,
-            onComplete = { mealList ->
+            categoryName = category.categoryName
+        ).subscribe(
+            { mealList ->
                 mealAdapter.updateList(mealList)
             },
-            onError = { t ->
-                Log.e("Server", "enqueue request error = ${t.message}", t)
+            { error ->
+                Log.e("Server", "enqueue request error = ${error.message}", error)
                 toast(resources.getString(R.string.load_error))
+
             }
         )
     }

@@ -44,16 +44,14 @@ class MealDetailsFragment :
 
     private fun initViewsFromNetwork() {
         val mealId = requireArguments().getInt(KEY_MEAL_ID)
-        fetchMealDetailsDisposable = repository.fetchMealDetails(
-            mealId = mealId,
-            onComplete = { mealDetailsUiModel ->
-                initViews(mealDetailsUiModel)
-            },
-            onError = { t ->
-                Log.e("Server", "enqueue request error = ${t.message}", t)
-                toast(resources.getString(R.string.load_error))
-            }
-        )
+        fetchMealDetailsDisposable = repository.fetchMealDetails(mealId = mealId)
+            .subscribe(
+                { mealDetailsUiModel -> initViews(mealDetailsUiModel) },
+                { error ->
+                    Log.e("Server", "enqueue request error = ${error.message}", error)
+                    toast(resources.getString(R.string.load_error))
+                }
+            )
     }
 
     private fun initViews(mealDetails: MealDetailsUIModel) {

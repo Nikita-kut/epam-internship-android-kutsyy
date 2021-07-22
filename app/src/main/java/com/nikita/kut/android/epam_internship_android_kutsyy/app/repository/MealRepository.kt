@@ -2,6 +2,7 @@ package com.nikita.kut.android.epam_internship_android_kutsyy.app.repository
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.rxjava3.EmptyResultSetException
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.db.AppDataBase
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.db.model.DbCategoryModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.db.model.DbMealDetailsModel
@@ -14,6 +15,8 @@ import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.toMealDeta
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.model.MealDetailsUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.MealUIModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
@@ -23,64 +26,33 @@ class MealRepository(context: Context) {
         Room.databaseBuilder(context, AppDataBase::class.java, AppDataBase.DB_NAME).build()
 
     fun fetchMealList(
-        categoryName: String,
-        onComplete: (List<MealUIModel>) -> Unit,
-        onError: (Throwable) -> Unit
-    ): Disposable {
-        return RetrofitClient.retrofitService.getMeals(categoryName)
-            .map { remoteMealList ->
-                remoteMealList.toListMealUIModel()
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { listMeals ->
-                    onComplete(listMeals)
-                },
-                { throwable ->
-                    onError(throwable)
-                }
-            )
-    }
+        categoryName: String
+    ): Single<List<MealUIModel>> = RetrofitClient.retrofitService.getMeals(categoryName)
+        .map { remoteMealList ->
+            remoteMealList.toListMealUIModel()
+        }
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
 
     fun fetchMealDetails(
-        mealId: Int,
-        onComplete: (MealDetailsUIModel) -> Unit,
-        onError: (Throwable) -> Unit
-    ): Disposable {
-        return database.getMealDetailsDao()
-            .getMealDetails(mealId)
-            .map { dbMealDetailsModel ->
-                dbMealDetailsModel.toMealDetailsUIModel()
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { mealDetailsModel ->
-                    if (mealDetailsModel != null) {
-                        onComplete(mealDetailsModel)
+        mealId: Int
+    ): Single<MealDetailsUIModel> = database.getMealDetailsDao().getMealDetails(mealId)
+        .onErrorResumeNext { error ->
+            if (error is EmptyResultSetException) {
+                RetrofitClient.retrofitService.getMealDetails(mealId)
+                    .map { mealDetailsRemoteModel ->
+                        mealDetailsRemoteModel.mealDetails.first().toDbMealDetailsModel()
                     }
-                },
-                { throwable ->
-                    RetrofitClient.retrofitService.getMealDetails(mealId)
-                        .map { remoteMealDetails ->
-                            remoteMealDetails.mealDetails.first().toDbMealDetailsModel()
-                        }
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { dbMealDetailsModel ->
-                            updateMealDetails(dbMealDetailsModel)
-                            onComplete(dbMealDetailsModel.toMealDetailsUIModel())
-                        }
-                    onError(throwable)
-                }
-            )
-    }
+                    .flatMap { mealDetailsDbModel ->
+                        updateMealDetailsInDb(mealDetailsDbModel)
+                            .toSingleDefault(mealDetailsDbModel)
+                    }
+            } else Single.error(error)
+        }
+        .map { mealDetailsDbModel -> mealDetailsDbModel.toMealDetailsUIModel() }
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
 
-    private fun updateMealDetails(dbMealDetails: DbMealDetailsModel): Disposable {
-        return database.getMealDetailsDao().updateMealDetails(dbMealDetails)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
-    }
+    private fun updateMealDetailsInDb(dbMealDetails: DbMealDetailsModel): Completable =
+        database.getMealDetailsDao().updateMealDetails(dbMealDetails)
 }
