@@ -17,13 +17,16 @@ import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.toMealDeta
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealDetailsBinding
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.model.MealDetailsUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.presentation.adapter.TagAdapter
+import io.reactivex.rxjava3.disposables.Disposable
 
 class MealDetailsFragment :
     ViewBindingFragment<FragmentMealDetailsBinding>(FragmentMealDetailsBinding::inflate) {
 
-    private val repository = MealRepository()
+    private val repository by lazy { MealRepository(requireContext()) }
 
     private var tagAdapter by AutoClearedValue<TagAdapter>()
+
+    private var fetchMealDetailsDisposable: Disposable? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,18 +37,21 @@ class MealDetailsFragment :
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        fetchMealDetailsDisposable?.dispose()
+    }
+
     private fun initViewsFromNetwork() {
         val mealId = requireArguments().getInt(KEY_MEAL_ID)
-        repository.fetchMealDetails(
-            mealId = mealId,
-            onComplete = { mealDetailsUiModel ->
-                initViews(mealDetailsUiModel)
-            },
-            onError = { t ->
-                Log.e("Server", "enqueue request error = ${t.message}", t)
-                toast(resources.getString(R.string.load_error))
-            }
-        )
+        fetchMealDetailsDisposable = repository.fetchMealDetails(mealId = mealId)
+            .subscribe(
+                { mealDetailsUiModel -> initViews(mealDetailsUiModel) },
+                { error ->
+                    Log.e("Server", "enqueue request error = ${error.message}", error)
+                    toast(resources.getString(R.string.load_error))
+                }
+            )
     }
 
     private fun initViews(mealDetails: MealDetailsUIModel) {

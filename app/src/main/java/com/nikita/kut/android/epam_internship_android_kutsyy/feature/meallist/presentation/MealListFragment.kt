@@ -8,27 +8,27 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.preference.SharedPreferenceModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.repository.CategoryRepository
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.repository.MealRepository
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.AutoClearedValue
 import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.ViewBindingFragment
-import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.toListCategoryUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealListBinding
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.presentation.MealDetailsFragment
-import com.nikita.kut.android.epam_internship_android_kutsyy.app.util.toListMealUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.CategoryUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.model.MealUIModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.category.CategoryAdapter
 import com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.adapter.meal.MealAdapter
+import io.reactivex.rxjava3.disposables.Disposable
 
 class MealListFragment :
     ViewBindingFragment<FragmentMealListBinding>(FragmentMealListBinding::inflate),
     MealAdapter.OnMealItemClickListener,
     CategoryAdapter.OnCategoryItemClickListener {
 
-    private val mealRepository = MealRepository()
+    private val mealRepository by lazy { MealRepository(requireContext()) }
 
-    private val categoryRepository = CategoryRepository()
+    private val categoryRepository by lazy { CategoryRepository(requireContext()) }
 
     private var mealAdapter by AutoClearedValue<MealAdapter>()
 
@@ -36,21 +36,39 @@ class MealListFragment :
 
     private var categories: List<CategoryUIModel>? = null
 
+    private var fetchCategoryDisposable: Disposable? = null
+
+    private var fetchMealListDisposable: Disposable? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        SharedPreferenceModel.with(requireActivity().application)
         initRVCategoryList()
-        initCategoriesFromNetwork()
+        initCategoriesList()
         initRVMealList()
     }
 
-    private fun initCategoriesFromNetwork() {
-        categoryRepository.fetchCategoryList(
-            onComplete = { categoryList ->
+    override fun onDestroyView() {
+        super.onDestroyView()
+        fetchCategoryDisposable?.dispose()
+        fetchMealListDisposable?.dispose()
+    }
+
+    private fun initCategoriesList() {
+        fetchCategoryDisposable = categoryRepository.fetchCategoryList().subscribe(
+            { categoryList ->
                 this.categories = categoryList
                 categoryAdapter.updateCategoryList(categories ?: listOf())
+                if (SharedPreferenceModel.preferences?.contains(LAST_SELECTED_ITEM)
+                        ?: error("Shared preference no init")
+                ) {
+                    val lastSelectedItemId = SharedPreferenceModel.get<Int>(LAST_SELECTED_ITEM)
+                    val categoryModel = categoryList.first { it.id == lastSelectedItemId }
+                    onCategoryClick(categoryModel)
+                }
             },
-            onError = { t ->
-                Log.e("Server", "enqueue request error = ${t.message}", t)
+            { error ->
+                Log.e("Server", "enqueue request error = ${error.message}", error)
                 toast(resources.getString(R.string.load_error))
             }
         )
@@ -82,16 +100,19 @@ class MealListFragment :
 
     override fun onCategoryClick(category: CategoryUIModel) {
         category.isSelected = category.isSelected.not()
+        SharedPreferenceModel.put(category.id, LAST_SELECTED_ITEM)
         categories?.forEach { if (it != category) it.isSelected = false }
         categoryAdapter.updateCategoryList(categories ?: listOf())
-        mealRepository.fetchMealList(
-            categoryName = category.categoryName,
-            onComplete = { mealList ->
+        fetchMealListDisposable = mealRepository.fetchMealList(
+            categoryName = category.categoryName
+        ).subscribe(
+            { mealList ->
                 mealAdapter.updateList(mealList)
             },
-            onError = { t ->
-                Log.e("Server", "enqueue request error = ${t.message}", t)
+            { error ->
+                Log.e("Server", "enqueue request error = ${error.message}", error)
                 toast(resources.getString(R.string.load_error))
+
             }
         )
     }
@@ -113,6 +134,7 @@ class MealListFragment :
     }
 
     companion object {
+        private const val LAST_SELECTED_ITEM = "last_selected_item"
         fun newInstance(): MealListFragment = MealListFragment()
     }
 }

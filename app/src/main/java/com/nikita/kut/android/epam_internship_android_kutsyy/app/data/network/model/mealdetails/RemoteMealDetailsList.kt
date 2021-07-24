@@ -1,4 +1,4 @@
-package com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.mealdetails
+package com.nikita.kut.android.epam_internship_android_kutsyy.app.data.network.model.mealdetails
 
 import com.google.gson.annotations.SerializedName
 

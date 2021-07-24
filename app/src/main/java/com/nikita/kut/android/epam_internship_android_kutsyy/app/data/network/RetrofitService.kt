@@ -1,10 +1,9 @@
 package com.nikita.kut.android.epam_internship_android_kutsyy.app.data.network
 
-import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.mealdetails.RemoteMealDetailsList
-import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.category.RemoteCategoryList
-import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.model.meal.RemoteMealList
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.network.model.mealdetails.RemoteMealDetailsList
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.network.model.category.RemoteCategoryList
+import com.nikita.kut.android.epam_internship_android_kutsyy.app.data.network.model.meal.RemoteMealList
 import io.reactivex.rxjava3.core.Single
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
