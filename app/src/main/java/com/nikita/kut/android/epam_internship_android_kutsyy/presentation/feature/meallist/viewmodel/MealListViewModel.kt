@@ -54,7 +54,8 @@ class MealListViewModel(
                 },
                 { error ->
                     Log.e("Server", "enqueue request error = ${error.message}", error)
-                })
+                }
+            )
     }
 
     override fun onCleared() {

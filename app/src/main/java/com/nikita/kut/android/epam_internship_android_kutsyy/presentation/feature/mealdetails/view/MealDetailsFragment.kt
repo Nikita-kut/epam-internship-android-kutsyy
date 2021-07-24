@@ -1,27 +1,24 @@
 package com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.mealdetails.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.nikita.kut.android.epam_internship_android_kutsyy.R
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.db.AppDataBase
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.network.RetrofitClient
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.repository.MealRepositoryImpl
-import com.nikita.kut.android.epam_internship_android_kutsyy.util.memory.AutoClearedValue
-import com.nikita.kut.android.epam_internship_android_kutsyy.util.memory.ViewBindingFragment
-import com.nikita.kut.android.epam_internship_android_kutsyy.util.setImage
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealDetailsBinding
 import com.nikita.kut.android.epam_internship_android_kutsyy.domain.usecase.FetchMealDetailsUseCase
-import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.model.MealDetailsUI
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.mealdetails.view.adapter.TagAdapter
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.mealdetails.viewmodel.MealDetailsViewModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.mealdetails.viewmodel.MealDetailsViewModelFactory
+import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.model.MealDetailsUI
+import com.nikita.kut.android.epam_internship_android_kutsyy.util.memory.AutoClearedValue
+import com.nikita.kut.android.epam_internship_android_kutsyy.util.memory.ViewBindingFragment
+import com.nikita.kut.android.epam_internship_android_kutsyy.util.setImage
 
 class MealDetailsFragment :
     ViewBindingFragment<FragmentMealDetailsBinding>(FragmentMealDetailsBinding::inflate) {

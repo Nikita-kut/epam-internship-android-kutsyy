@@ -1,9 +1,7 @@
 package com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.meallist.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,19 +13,18 @@ import com.nikita.kut.android.epam_internship_android_kutsyy.data.network.Retrof
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.preference.SharedPreferenceModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.repository.CategoryRepositoryImpl
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.repository.MealRepositoryImpl
-import com.nikita.kut.android.epam_internship_android_kutsyy.util.memory.AutoClearedValue
-import com.nikita.kut.android.epam_internship_android_kutsyy.util.memory.ViewBindingFragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealListBinding
 import com.nikita.kut.android.epam_internship_android_kutsyy.domain.usecase.FetchCategoryListUseCase
 import com.nikita.kut.android.epam_internship_android_kutsyy.domain.usecase.FetchMealListUseCase
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.mealdetails.view.MealDetailsFragment
-import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.model.CategoryUI
-import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.model.MealUI
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.meallist.view.adapter.category.CategoryAdapter
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.meallist.view.adapter.meal.MealAdapter
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.meallist.viewmodel.MealListViewModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.meallist.viewmodel.MealListViewModelFactory
-import io.reactivex.rxjava3.disposables.Disposable
+import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.model.CategoryUI
+import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.model.MealUI
+import com.nikita.kut.android.epam_internship_android_kutsyy.util.memory.AutoClearedValue
+import com.nikita.kut.android.epam_internship_android_kutsyy.util.memory.ViewBindingFragment
 
 class MealListFragment :
     ViewBindingFragment<FragmentMealListBinding>(FragmentMealListBinding::inflate),

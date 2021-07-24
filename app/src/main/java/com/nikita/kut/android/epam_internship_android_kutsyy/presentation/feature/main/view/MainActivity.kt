@@ -2,7 +2,6 @@ package com.nikita.kut.android.epam_internship_android_kutsyy.presentation.featu
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.main.view.MainFragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
