@@ -6,7 +6,7 @@
     app:startDestination="@id/mainFragment">
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.nikita.kut.android.epam_internship_android_kutsyy.feature.main.presentation.MainFragment"
+        android:name="com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.main.view.MainFragment"
         android:label="MainFragment" >
         <action
             android:id="@+id/action_mainFragment_to_mealListFragment2"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/mealListFragment2"
-        android:name="com.nikita.kut.android.epam_internship_android_kutsyy.feature.meallist.presentation.MealListFragment"
+        android:name="com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.meallist.view.MealListFragment"
         android:label="fragment_meal_list"
         tools:layout="@layout/fragment_meal_list" >
         <action
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/mealDetailsFragment"
-        android:name="com.nikita.kut.android.epam_internship_android_kutsyy.feature.mealdetails.presentation.MealDetailsFragment"
+        android:name="com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.mealdetails.view.MealDetailsFragment"
         android:label="fragment_meal_details"
         tools:layout="@layout/fragment_meal_details" />
 </navigation>
