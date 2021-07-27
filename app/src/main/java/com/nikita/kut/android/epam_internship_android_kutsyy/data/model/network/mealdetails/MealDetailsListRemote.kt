@@ -5,5 +5,4 @@ import com.google.gson.annotations.SerializedName
 data class MealDetailsListRemote(
     @SerializedName(value = "meals")
     val mealDetails: List<MealDetailsRemote>
-) {
-}
+)

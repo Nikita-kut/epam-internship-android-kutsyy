@@ -2,6 +2,7 @@ package com.nikita.kut.android.epam_internship_android_kutsyy.presentation.featu
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.nikita.kut.android.epam_internship_android_kutsyy.data.db.AppDataBase
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -12,6 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        AppDataBase.initDatabase(this)
     }
 
     override fun onBackPressed() {

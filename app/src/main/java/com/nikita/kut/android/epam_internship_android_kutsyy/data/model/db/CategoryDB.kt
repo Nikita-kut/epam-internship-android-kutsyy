@@ -7,9 +7,9 @@ import com.nikita.kut.android.epam_internship_android_kutsyy.data.model.db.Categ
 
 @Entity(tableName = TABLE_NAME)
 data class CategoryDB(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int,
-    @ColumnInfo (name = "category_name") val categoryName: String,
+    @ColumnInfo(name = "category_name") val categoryName: String,
     @ColumnInfo(name = "category_picture") val categoryPicture: String,
 ) {
     companion object {

@@ -1,8 +1,11 @@
 package com.nikita.kut.android.epam_internship_android_kutsyy.data.db
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.nikita.kut.android.epam_internship_android_kutsyy.App
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.db.AppDataBase.Companion.DB_VERSION
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.db.converters.ListTagsConverter
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.db.dao.CategoryDao
@@ -29,6 +32,17 @@ abstract class AppDataBase : RoomDatabase() {
     companion object {
         const val DB_VERSION = 1
         const val DB_NAME = "app-database"
-    }
+        private var INSTANCE: AppDataBase? = null
+        fun initDatabase(context: Context) {
+            if (INSTANCE == null) {
+                INSTANCE = Room.databaseBuilder(
+                    context,
+                    AppDataBase::class.java,
+                    DB_NAME
+                ).build()
+            }
+        }
 
+        fun getInstance(): AppDataBase = INSTANCE as AppDataBase
+    }
 }

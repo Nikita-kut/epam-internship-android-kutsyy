@@ -7,7 +7,7 @@ import com.nikita.kut.android.epam_internship_android_kutsyy.data.model.db.MealD
 
 @Entity(tableName = TABLE_NAME)
 data class MealDetailsDB(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int,
     @ColumnInfo(name = "meal_detail_name") val mealName: String,
     @ColumnInfo(name = "meal_detail_category") val mealCategory: String,

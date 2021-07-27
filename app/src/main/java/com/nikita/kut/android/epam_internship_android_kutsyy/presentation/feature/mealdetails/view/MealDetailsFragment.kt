@@ -23,15 +23,11 @@ import com.nikita.kut.android.epam_internship_android_kutsyy.util.setImage
 class MealDetailsFragment :
     ViewBindingFragment<FragmentMealDetailsBinding>(FragmentMealDetailsBinding::inflate) {
 
-    private val database by lazy {
-        Room.databaseBuilder(requireContext(), AppDataBase::class.java, AppDataBase.DB_NAME).build()
-    }
-
     private var tagAdapter by AutoClearedValue<TagAdapter>()
 
     private val viewModel: MealDetailsViewModel by viewModels {
         MealDetailsViewModelFactory(
-            FetchMealDetailsUseCase(MealRepositoryImpl(database, RetrofitClient.retrofitApi))
+            FetchMealDetailsUseCase(MealRepositoryImpl(RetrofitClient.retrofitApi))
         )
     }
 

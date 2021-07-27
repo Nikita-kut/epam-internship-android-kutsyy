@@ -31,10 +31,6 @@ class MealListFragment :
     MealAdapter.OnMealItemClickListener,
     CategoryAdapter.OnCategoryItemClickListener {
 
-    private val database by lazy {
-        Room.databaseBuilder(requireContext(), AppDataBase::class.java, AppDataBase.DB_NAME).build()
-    }
-
     private var mealAdapter by AutoClearedValue<MealAdapter>()
 
     private var categoryAdapter by AutoClearedValue<CategoryAdapter>()
@@ -43,8 +39,8 @@ class MealListFragment :
 
     private val viewModel: MealListViewModel by viewModels {
         MealListViewModelFactory(
-            FetchCategoryListUseCase(CategoryRepositoryImpl(database, RetrofitClient.retrofitApi)),
-            FetchMealListUseCase(MealRepositoryImpl(database, RetrofitClient.retrofitApi))
+            FetchCategoryListUseCase(CategoryRepositoryImpl(RetrofitClient.retrofitApi)),
+            FetchMealListUseCase(MealRepositoryImpl(RetrofitClient.retrofitApi))
         )
     }
 
