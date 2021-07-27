@@ -3,10 +3,10 @@ package com.nikita.kut.android.epam_internship_android_kutsyy.data.model.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.nikita.kut.android.epam_internship_android_kutsyy.data.model.db.MealDetailsEntity.Companion.TABLE_NAME
+import com.nikita.kut.android.epam_internship_android_kutsyy.data.model.db.MealDetailsDB.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
-data class MealDetailsEntity(
+data class MealDetailsDB(
     @PrimaryKey
     @ColumnInfo(name = "id") val id: Int,
     @ColumnInfo(name = "meal_detail_name") val mealName: String,

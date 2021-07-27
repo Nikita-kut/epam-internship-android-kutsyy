@@ -8,12 +8,12 @@ import com.nikita.kut.android.epam_internship_android_kutsyy.data.db.converters.
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.db.dao.CategoryDao
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.db.dao.MealDao
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.db.dao.MealDetailsDao
-import com.nikita.kut.android.epam_internship_android_kutsyy.data.model.db.CategoryEntity
-import com.nikita.kut.android.epam_internship_android_kutsyy.data.model.db.MealDetailsEntity
-import com.nikita.kut.android.epam_internship_android_kutsyy.data.model.db.MealEntity
+import com.nikita.kut.android.epam_internship_android_kutsyy.data.model.db.CategoryDB
+import com.nikita.kut.android.epam_internship_android_kutsyy.data.model.db.MealDetailsDB
+import com.nikita.kut.android.epam_internship_android_kutsyy.data.model.db.MealDB
 
 @Database(
-    entities = [MealEntity::class, CategoryEntity::class, MealDetailsEntity::class],
+    entities = [MealDB::class, CategoryDB::class, MealDetailsDB::class],
     version = DB_VERSION,
     exportSchema = false
 )

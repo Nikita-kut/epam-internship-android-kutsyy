@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.domain.usecase.FetchMealDetailsUseCase
+import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.mapper.toMealDetailsUI
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.model.MealDetailsUI
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
@@ -25,7 +26,7 @@ class MealDetailsViewModel(private val fetchMealDetailsUseCase: FetchMealDetails
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { mealDetails ->
-                    mutableMealDetails.value = mealDetails
+                    mutableMealDetails.value = mealDetails.toMealDetailsUI()
                 },
                 { error ->
                     Log.e("Server", "enqueue request error = ${error.message}", error)

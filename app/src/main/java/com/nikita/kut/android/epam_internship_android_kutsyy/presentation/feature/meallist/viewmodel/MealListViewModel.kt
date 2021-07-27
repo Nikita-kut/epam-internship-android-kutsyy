@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.domain.usecase.FetchCategoryListUseCase
 import com.nikita.kut.android.epam_internship_android_kutsyy.domain.usecase.FetchMealListUseCase
+import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.mapper.toListCategoryUI
+import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.mapper.toListMealUI
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.model.CategoryUI
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.model.MealUI
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -36,7 +38,7 @@ class MealListViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { categoryList ->
-                    mutableCategoryList.value = categoryList
+                    mutableCategoryList.value = categoryList.toListCategoryUI()
                 },
                 { error ->
                     Log.e("Server", "enqueue request error = ${error.message}", error)
@@ -50,7 +52,7 @@ class MealListViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { mealList ->
-                    mutableMealList.value = mealList
+                    mutableMealList.value = mealList.toListMealUI()
                 },
                 { error ->
                     Log.e("Server", "enqueue request error = ${error.message}", error)
