@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/meal_list_background"
-    tools:context=".feature.meallist.presentation.MealListFragment">
+    tools:context=".presentation.feature.meallist.view.MealListFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_meal_list"
