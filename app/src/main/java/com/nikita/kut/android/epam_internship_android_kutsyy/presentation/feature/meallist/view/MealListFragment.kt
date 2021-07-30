@@ -6,9 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
-import com.nikita.kut.android.epam_internship_android_kutsyy.data.db.AppDataBase
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.network.RetrofitClient
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.preference.SharedPreferenceModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.repository.CategoryRepositoryImpl
@@ -39,8 +37,8 @@ class MealListFragment :
 
     private val viewModel: MealListViewModel by viewModels {
         MealListViewModelFactory(
-            FetchCategoryListUseCase(CategoryRepositoryImpl(RetrofitClient.retrofitApi)),
-            FetchMealListUseCase(MealRepositoryImpl(RetrofitClient.retrofitApi))
+            FetchCategoryListUseCase(CategoryRepositoryImpl(RetrofitClient.mealsApi)),
+            FetchMealListUseCase(MealRepositoryImpl(RetrofitClient.mealsApi))
         )
     }
 

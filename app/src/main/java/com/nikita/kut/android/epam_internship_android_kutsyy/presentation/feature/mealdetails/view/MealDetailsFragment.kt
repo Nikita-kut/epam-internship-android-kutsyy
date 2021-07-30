@@ -6,8 +6,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import com.nikita.kut.android.epam_internship_android_kutsyy.data.db.AppDataBase
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.network.RetrofitClient
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.repository.MealRepositoryImpl
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealDetailsBinding
@@ -27,7 +25,7 @@ class MealDetailsFragment :
 
     private val viewModel: MealDetailsViewModel by viewModels {
         MealDetailsViewModelFactory(
-            FetchMealDetailsUseCase(MealRepositoryImpl(RetrofitClient.retrofitApi))
+            FetchMealDetailsUseCase(MealRepositoryImpl(RetrofitClient.mealsApi))
         )
     }
 

@@ -12,7 +12,7 @@ object RetrofitClient {
         getRetrofitClient(BASE_URL)
     }
 
-    val retrofitApi: MealsApi
+    val mealsApi: MealsApi
         get() = retrofitClient.create(MealsApi::class.java)
 
     private fun getRetrofitClient(baseUrl: String): Retrofit = Retrofit.Builder()
