@@ -14,7 +14,8 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 class MealRepositoryImpl(
-    private val retrofitApi: MealsApi
+    private val retrofitApi: MealsApi,
+    private val database: AppDataBase
 ) : MealRepository {
 
     override fun fetchMealList(categoryName: String): Single<List<MealEntity>> =
@@ -22,7 +23,7 @@ class MealRepositoryImpl(
             .map { remoteMealList -> remoteMealList.toListMealEntity() }
 
     override fun fetchMealDetails(mealId: Int): Single<MealDetailsEntity> =
-        AppDataBase.getInstance().getMealDetailsDao().getMealDetails(mealId)
+        database.getMealDetailsDao().getMealDetails(mealId)
             .onErrorResumeNext { error ->
                 if (error is EmptyResultSetException) {
                     retrofitApi.getMealDetails(mealId)
@@ -38,5 +39,5 @@ class MealRepositoryImpl(
             .map { mealDetailsDbModel -> mealDetailsDbModel.toMealDetailsEntity() }
 
     private fun updateMealDetailsInDb(dbMealDetails: MealDetailsDB): Completable =
-        AppDataBase.getInstance().getMealDetailsDao().updateMealDetails(dbMealDetails)
+        database.getMealDetailsDao().updateMealDetails(dbMealDetails)
 }

@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        AppDataBase.initDatabase(this)
+//        AppDataBase.initDatabase(this)
     }
 
     override fun onBackPressed() {

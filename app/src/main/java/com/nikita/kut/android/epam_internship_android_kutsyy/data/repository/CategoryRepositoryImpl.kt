@@ -11,11 +11,12 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 class CategoryRepositoryImpl(
-    private val retrofitApi: MealsApi
+    private val retrofitApi: MealsApi,
+    private val dataBase: AppDataBase
 ) : CategoryRepository {
 
     override fun fetchCategoryList(): Single<List<CategoryEntity>> =
-        AppDataBase.getInstance().getCategoryDao()
+        dataBase.getCategoryDao()
             .getCategories()
             .flatMap { categoriesDbModel ->
                 if (categoriesDbModel.isEmpty()) {
@@ -30,7 +31,7 @@ class CategoryRepositoryImpl(
             .map { categoryDbModels -> categoryDbModels.toListCategoryEntity() }
 
     private fun updateCategoriesInDb(categoriesDbList: List<CategoryDB>): Completable =
-        AppDataBase.getInstance().getCategoryDao()
+        dataBase.getCategoryDao()
             .updateCategories(categoriesDbList)
 
 }
