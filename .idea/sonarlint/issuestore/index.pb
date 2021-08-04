@@ -1,6 +1,4 @@
 
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 ó
 gapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/util/memory/AutoClearedValue.kt,8\d\8d872f156256273aab9dc9b318682464fbfacc93
 ø
@@ -91,11 +89,7 @@ uapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/data/mo
 yapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/data/model/network/category/CategoryListRemote.kt,b\b\bbd965b685397a2bc551d0cce3a0e356b6b436d4
 Ö
 Uapp/src/test/java/com/nikita/kut/android/epam_internship_android_kutsyy/MapperTest.kt,7\3\73f1a9a3e57594691ac87d6e2a7c6aba07d07545
-ç
-]app/src/test/java/com/nikita/kut/android/epam_internship_android_kutsyy/NetworkRequestTest.kt,0\7\079d03cab2846f0a604d71ebc59c381652eb53c9
 µ
 Ñapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/presentation/feature/meallist/viewmodel/MealListViewModel.kt,8\7\87116132d9a2be6f10cb93bb53be3b7f139aedb9
-¢
-rapp/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/domain/usecase/FetchCategoryListUseCase.kt,9\2\92a587839a4dc3aa1a2e0e760d0301152a8c36b5
 ê
 `app/src/main/java/com/nikita/kut/android/epam_internship_android_kutsyy/data/network/MealsApi.kt,4\6\46c88dfb4dacdf40fc3cf782ba14bbe55cfe6e97

@@ -8,7 +8,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerAppComponent.builder().context(applicationContext).build()
+        appComponent = DaggerAppComponent.builder().bindContext(applicationContext).build()
     }
 
     companion object {

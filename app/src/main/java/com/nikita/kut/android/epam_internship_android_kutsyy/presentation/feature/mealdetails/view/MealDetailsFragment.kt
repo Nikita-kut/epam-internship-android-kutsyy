@@ -7,11 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.epam_internship_android_kutsyy.App
-import com.nikita.kut.android.epam_internship_android_kutsyy.data.db.AppDataBase
-import com.nikita.kut.android.epam_internship_android_kutsyy.data.network.RetrofitClient
-import com.nikita.kut.android.epam_internship_android_kutsyy.data.repository.MealRepositoryImpl
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealDetailsBinding
-import com.nikita.kut.android.epam_internship_android_kutsyy.domain.usecase.FetchMealDetailsUseCase
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.mealdetails.view.adapter.TagAdapter
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.mealdetails.viewmodel.MealDetailsViewModel
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.mealdetails.viewmodel.MealDetailsViewModelFactory
@@ -26,15 +22,7 @@ class MealDetailsFragment :
     private var tagAdapter by AutoClearedValue<TagAdapter>()
 
     private val viewModel: MealDetailsViewModel by viewModels {
-        MealDetailsViewModelFactory(
-            FetchMealDetailsUseCase(
-                MealRepositoryImpl(
-                    RetrofitClient.mealsApi,
-//                    AppDataBase.getInstance()
-                    App.appComponent.database
-                )
-            )
-        )
+        MealDetailsViewModelFactory(App.appComponent.fetchMealDetailsUseCase)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
