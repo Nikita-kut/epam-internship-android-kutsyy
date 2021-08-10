@@ -1,7 +1,6 @@
 package com.nikita.kut.android.epam_internship_android_kutsyy.di
 
 import android.content.Context
-import com.nikita.kut.android.epam_internship_android_kutsyy.data.db.AppDataBase
 import com.nikita.kut.android.epam_internship_android_kutsyy.domain.usecase.FetchCategoryListUseCase
 import com.nikita.kut.android.epam_internship_android_kutsyy.domain.usecase.FetchMealDetailsUseCase
 import com.nikita.kut.android.epam_internship_android_kutsyy.domain.usecase.FetchMealListUseCase
@@ -26,4 +25,5 @@ interface AppComponent {
         abstract fun bindContext(context: Context): Builder
         abstract fun build(): AppComponent
     }
+
 }
