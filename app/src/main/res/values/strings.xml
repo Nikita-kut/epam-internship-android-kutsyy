@@ -7,4 +7,9 @@
     <string name="toolbar_text_example">Just foods</string>
     <string name="sort_item_menu">Sort</string>
     <string name="load_error">"Load error from server"</string>
+    <string name="filter">Фильтр</string>
+    <string name="sort_by_alphabet">Сортировка по алфавиту</string>
+    <string name="by_up">По возрастанию</string>
+    <string name="by_down">По убыванию</string>
+    <string name="apply">Применить</string>
 </resources>

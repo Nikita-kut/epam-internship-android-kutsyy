@@ -6,14 +6,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.nikita.kut.android.epam_internship_android_kutsyy.App
 import com.nikita.kut.android.epam_internship_android_kutsyy.R
-import com.nikita.kut.android.epam_internship_android_kutsyy.data.network.RetrofitClient
 import com.nikita.kut.android.epam_internship_android_kutsyy.data.preference.SharedPreferenceModel
-import com.nikita.kut.android.epam_internship_android_kutsyy.data.repository.CategoryRepositoryImpl
-import com.nikita.kut.android.epam_internship_android_kutsyy.data.repository.MealRepositoryImpl
 import com.nikita.kut.android.epam_internship_android_kutsyy.databinding.FragmentMealListBinding
-import com.nikita.kut.android.epam_internship_android_kutsyy.domain.usecase.FetchCategoryListUseCase
-import com.nikita.kut.android.epam_internship_android_kutsyy.domain.usecase.FetchMealListUseCase
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.mealdetails.view.MealDetailsFragment
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.meallist.view.adapter.category.CategoryAdapter
 import com.nikita.kut.android.epam_internship_android_kutsyy.presentation.feature.meallist.view.adapter.meal.MealAdapter
@@ -37,8 +33,8 @@ class MealListFragment :
 
     private val viewModel: MealListViewModel by viewModels {
         MealListViewModelFactory(
-            FetchCategoryListUseCase(CategoryRepositoryImpl(RetrofitClient.mealsApi)),
-            FetchMealListUseCase(MealRepositoryImpl(RetrofitClient.mealsApi))
+            App.appComponent.fetchCategoryListUseCase,
+            App.appComponent.fetchMealListUseCase
         )
     }
 

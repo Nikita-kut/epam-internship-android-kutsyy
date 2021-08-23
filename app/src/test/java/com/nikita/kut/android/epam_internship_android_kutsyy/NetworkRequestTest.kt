@@ -11,9 +11,9 @@ class NetworkRequestTest {
     @Test
     fun is_category_list_get() {
         var networkData = CategoryListRemote(listOf())
-        RetrofitClient.mealsApi.getCategories().subscribe({
-            networkData = it
-        }, {})
+//        RetrofitClient.mealsApi.getCategories().subscribe({
+//            networkData = it
+//        }, {})
         val categoryListRemote = CategoryListRemote(
             categories = listOf(
                 CategoryRemote(
